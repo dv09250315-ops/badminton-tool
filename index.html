@@ -48,15 +48,15 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      width: 390px;
-      min-height: 844px;
+      width: 340px;
+      min-height: 650px;
       max-width: 100%;
       background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 42px;
       box-shadow: 0 20px 60px rgba(188, 117, 146, 0.22);
-      padding: 58px 28px 42px;
+      padding: 48px 20px 24px;
       text-align: center;
       overflow: hidden;
     }
@@ -73,18 +73,18 @@
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 21px;
       line-height: 1.45;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       color: #3a2a31;
     }
 
     .typewriter {
-      min-height: 86px;
-      font-size: 17px;
-      line-height: 1.9;
+      min-height: 62px;
+      font-size: 14px;
+      line-height: 1.7;
       color: #5d4b53;
-      margin: 18px 0 22px;
+      margin: 10px 0 12px;
       white-space: pre-line;
     }
 
@@ -107,12 +107,12 @@
       background: #2d2730;
       color: #fff;
       border-radius: 18px;
-      padding: 18px;
+      padding: 12px;
       text-align: left;
       font-family: Consolas, monospace;
-      font-size: 13px;
-      line-height: 1.8;
-      margin: 20px 0;
+      font-size: 11px;
+      line-height: 1.55;
+      margin: 12px 0;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
     }
 
@@ -124,10 +124,10 @@
       width: 100%;
       border: none;
       border-radius: 18px;
-      padding: 15px 18px;
+      padding: 11px 14px;
       background: linear-gradient(135deg, #ff8fb3, #ffb2c9);
       color: white;
-      font-size: 16px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 10px 22px rgba(255, 129, 173, 0.35);
@@ -147,8 +147,8 @@
       border: 1px dashed #f2a7bf;
       border-radius: 20px;
       color: #6b4655;
-      line-height: 1.9;
-      font-size: 15px;
+      line-height: 1.55;
+      font-size: 12px;
       animation: fadeIn .6s ease forwards;
     }
 
@@ -183,10 +183,15 @@
       > 錯誤代碼：<span>Cannot stop loving you.</span>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
-      <button onclick="showSecret()">點我領取女友偏愛權限 ♡</button>
-      <button onclick="loveCounter()">再點一下看看 ♡</button>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+      <button onclick="showSecret()">領取女友偏愛權限 ♡</button>
+      <button onclick="loveCounter()">戳一下女友的心 ♡</button>
       <button id="runBtn">不愛女友</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+      <button onclick="choiceLove('A')">今天更愛她</button>
+      <button onclick="choiceLove('B')">明天也愛她</button>
     </div>
 
     <div id="counterText" style="margin-top:16px;color:#c05f84;font-size:14px;font-weight:600;"></div>
@@ -194,20 +199,16 @@
     <div class="secret" id="secret">
       <div style="font-size:18px;margin-bottom:10px;">♡ 系統通知 ♡</div>
       驗證成功。<br>
-      你已獲得：<br>
-      「女友永久偏愛權限」<br><br>
-      內容包含：<br>
-      無限想你、優先分享日常、專屬撒嬌、<br>
-      還有一個很愛很愛你的我。<br><br>
-      不是因為今天 520 才愛你，<br>
-      是今天剛好適合把喜歡說得明顯一點。
+      你已獲得「女友永久偏愛權限」<br><br>
+      包含：無限想你、優先分享日常、<br>
+      專屬撒嬌，還有一個很愛你的我。<br><br>
+      不是今天才愛你，<br>
+      是今天想講得明顯一點。
     </div>
 
-    <div style="margin-top:22px;background:#fff8fb;border-radius:18px;padding:16px;border:1px solid #ffd5e4;line-height:1.8;color:#6d4a58;font-size:14px;">
-      <b>男友即時狀態監測</b><br>
-      名稱：林宏翰<br>
-      危險程度：過度可愛<br>
-      目前狀態：被女友瘋狂想念中<br>
+    <div style="margin-top:12px;background:#fff8fb;border-radius:16px;padding:10px;border:1px solid #ffd5e4;line-height:1.55;color:#6d4a58;font-size:11px;">
+      <b>男友狀態監測</b><br>
+      名稱：林宏翰｜狀態：被想念中<br>
       系統建議：請立刻抱一下。
     </div>
 
@@ -236,16 +237,23 @@
     let loveCount = 0;
     const messages = [
       "想你 +1 ♡",
-      "女友撒嬌額度增加中 ♡",
+      "抱抱預約成功 ♡",
       "林宏翰專屬偏愛已啟動 ♡",
-      "警告：女友愛意持續暴增中 ♡",
-      "系統錯誤：愛你愛太多了 ♡"
+      "警告：女友愛意暴增 ♡",
+      "ERROR 520：愛你愛太多 ♡"
     ];
 
     function loveCounter() {
       const text = document.getElementById("counterText");
       text.innerHTML = messages[loveCount % messages.length];
       loveCount++;
+    }
+
+    function choiceLove(type) {
+      const text = document.getElementById("counterText");
+      text.innerHTML = type === 'A'
+        ? "選擇成功：今天已被女友愛爆 ♡"
+        : "系統紀錄：明天也逃不掉 ♡";
     }
 
     const runBtn = document.getElementById("runBtn");
