@@ -1,399 +1,269 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>羽球排場系統</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;color:#1a1a1a;background:#f5f5f2;padding:0}
-.app{padding:1rem;max-width:1000px;margin:0 auto}
-h1{font-size:18px;font-weight:500;padding:1rem 1rem 0;max-width:1000px;margin:0 auto}
-.tabs{display:flex;border-bottom:1px solid #e0ddd5;margin-bottom:1.25rem;background:#fff;padding:0 1rem;position:sticky;top:0;z-index:10}
-.tab{padding:12px 16px;font-size:14px;cursor:pointer;border:none;background:none;color:#666;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
-.tab.active{color:#1a1a1a;border-bottom:2px solid #1a1a1a;font-weight:500}
-.sec{display:none}.sec.active{display:block}
-.card{background:#fff;border:1px solid #e8e5dd;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem}
-.row{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
-input,select{padding:8px 10px;border:1px solid #ccc;border-radius:8px;font-size:14px;background:#fff;color:#1a1a1a}
-input:focus,select:focus{outline:none;box-shadow:0 0 0 2px #378ADD55}
-.btn{padding:8px 14px;border:1px solid #ccc;border-radius:8px;font-size:14px;cursor:pointer;background:#fff;color:#1a1a1a;font-weight:500;white-space:nowrap}
-.btn:hover{background:#f5f5f2}.btn:active{transform:scale(0.98)}
-.btn-blue{background:#185FA5;color:#E6F1FB;border-color:#185FA5}.btn-blue:hover{background:#0C447C}
-.btn-green{background:#3B6D11;color:#EAF3DE;border-color:#3B6D11}.btn-green:hover{background:#27500A}
-.btn-red{background:#A32D2D;color:#FCEBEB;border-color:#A32D2D}.btn-red:hover{background:#791F1F}
-.btn-amber{background:#854F0B;color:#FAEEDA;border-color:#854F0B}.btn-amber:hover{background:#633806}
-.btn-sm{padding:4px 10px;font-size:12px}
-.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:500;white-space:nowrap}
-.lv-dot{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:500;flex-shrink:0}
-.prow{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid #e8e5dd;border-radius:8px;margin-bottom:5px;background:#f9f8f5}
-.court-box{border:1px solid #e8e5dd;border-radius:12px;overflow:hidden;margin-bottom:.875rem}
-.court-hd{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;background:#f5f5f2;flex-wrap:wrap;gap:6px}
-.court-bd{padding:11px 14px;background:#fff}
-.timer-big{font-size:26px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:1px}
-.divider{border:none;border-top:1px solid #e8e5dd;margin:10px 0}
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:1rem}
-.sc{background:#f5f5f2;border-radius:8px;padding:9px 10px;text-align:center}
-.sn{font-size:20px;font-weight:500}.sl{font-size:11px;color:#888;margin-top:2px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:5px 8px;color:#888;font-weight:500;border-bottom:1px solid #e8e5dd;font-size:12px}
-td{padding:6px 8px;border-bottom:1px solid #e8e5dd;vertical-align:middle}
-.tag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:11px;font-weight:500}
-.empty{color:#bbb;text-align:center;padding:1.5rem 0;font-size:14px}
-.hint{font-size:12px;color:#888}
-.sec-lbl{font-size:11px;font-weight:500;color:#888;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
-.courts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.875rem}
-.setup-box{background:#f5f5f2;border-radius:10px;padding:12px 14px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.num-btn{width:32px;height:32px;border-radius:8px;border:1px solid #ccc;background:#fff;color:#1a1a1a;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:500}
-.num-btn:hover{background:#f5f5f2}
-.court-num{font-size:22px;font-weight:500;min-width:28px;text-align:center}
-@media(max-width:480px){.courts-grid{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>只給你看的小驚喜</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: linear-gradient(135deg, #fff1f5, #fdf7ff, #eef7ff);
+      color: #3b2f35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .heart-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 120, 160, 0.35);
+      animation: floatUp 8s linear infinite;
+      font-size: 18px;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
+      15% { opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 430px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(188, 117, 146, 0.22);
+      padding: 34px 26px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #fff0f5;
+      color: #c45b83;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.45;
+      margin-bottom: 16px;
+      color: #3a2a31;
+    }
+
+    .typewriter {
+      min-height: 86px;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #5d4b53;
+      margin: 18px 0 22px;
+      white-space: pre-line;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 18px;
+      background: #d96c94;
+      margin-left: 3px;
+      animation: blink 0.8s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .status {
+      background: #2d2730;
+      color: #fff;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: left;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      margin: 20px 0;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .status span {
+      color: #ffb6cf;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 15px 18px;
+      background: linear-gradient(135deg, #ff8fb3, #ffb2c9);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(255, 129, 173, 0.35);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    button:active {
+      transform: scale(0.97);
+      box-shadow: 0 6px 14px rgba(255, 129, 173, 0.3);
+    }
+
+    .secret {
+      display: none;
+      margin-top: 22px;
+      padding: 18px;
+      background: #fff6f9;
+      border: 1px dashed #f2a7bf;
+      border-radius: 20px;
+      color: #6b4655;
+      line-height: 1.9;
+      font-size: 15px;
+      animation: fadeIn .6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #9b7b88;
+    }
+  </style>
 </head>
 <body>
-<h1>🏸 羽球排場系統</h1>
-<div class="app">
-<div class="tabs">
-  <button class="tab active" onclick="goTab('setup')">設定</button>
-  <button class="tab" onclick="goTab('players')">球員</button>
-  <button class="tab" onclick="goTab('courts')">球場</button>
-  <button class="tab" onclick="goTab('history')">今日紀錄</button>
-</div>
+  <div class="heart-bg" id="heartBg"></div>
 
-<div id="t-setup" class="sec active">
-  <div class="card">
-    <div class="sec-lbl">球場數量</div>
-    <div class="setup-box">
-      <button class="num-btn" onclick="adjCourts(-1)">−</button>
-      <span class="court-num" id="court-num-disp">2</span>
-      <button class="num-btn" onclick="adjCourts(1)">+</button>
-      <span style="font-size:13px;color:#888">面球場</span>
+  <main class="card">
+    <div class="badge">SYSTEM LOVE CHECK</div>
+    <h1>嘿，林宏翰<br>這是一個只給你看的小網頁</h1>
+
+    <div class="typewriter">
+      <span id="typing"></span><span class="cursor"></span>
     </div>
-    <div class="hint" style="margin-bottom:12px">系統會同時為每面球場分配人員並排好候補</div>
-    <div class="divider"></div>
-    <div class="sec-lbl" style="margin-top:10px">加入球員</div>
-    <div class="row">
-      <input id="pname" placeholder="姓名" style="flex:1;min-width:80px">
-      <select id="plv" style="width:96px"></select>
-      <button class="btn btn-blue" onclick="addP()">加入</button>
+
+    <div class="status">
+      > 正在掃描女友心動指數... <span>99.99%</span><br>
+      > 正在偵測最想見的人... <span>是你</span><br>
+      > 系統結論：<span>她真的很喜歡你</span><br>
+      > 錯誤代碼：<span>Cannot stop loving you.</span>
     </div>
-    <div id="plist-setup"></div>
-    <div class="divider"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <span class="hint" id="pcnt-setup">尚無球員</span>
-      <button class="btn btn-green" onclick="doArrange()">自動排場，開始 →</button>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:10px;">
+      <button onclick="showSecret()">點我領取女友偏愛權限 ♡</button>
+      <button onclick="loveCounter()">再點一下看看 ♡</button>
+      <button id="runBtn">不愛女友</button>
     </div>
-  </div>
-</div>
 
-<div id="t-players" class="sec">
-  <div class="card">
-    <div class="row">
-      <input id="pname2" placeholder="姓名" style="flex:1;min-width:80px">
-      <select id="plv2" style="width:96px"></select>
-      <button class="btn btn-blue" onclick="addP2()">加入</button>
+    <div id="counterText" style="margin-top:16px;color:#c05f84;font-size:14px;font-weight:600;"></div>
+
+    <div class="secret" id="secret">
+      <div style="font-size:18px;margin-bottom:10px;">♡ 系統通知 ♡</div>
+      驗證成功。<br>
+      你已獲得：<br>
+      「女友永久偏愛權限」<br><br>
+      內容包含：<br>
+      無限想你、優先分享日常、專屬撒嬌、<br>
+      還有一個很愛很愛你的我。<br><br>
+      不是因為今天 520 才愛你，<br>
+      是今天剛好適合把喜歡說得明顯一點。
     </div>
-    <div id="plist"></div>
-    <div class="divider"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <span class="hint" id="pcnt">尚無球員</span>
-      <button class="btn btn-green" onclick="doArrange()">重新排場 →</button>
+
+    <div style="margin-top:22px;background:#fff8fb;border-radius:18px;padding:16px;border:1px solid #ffd5e4;line-height:1.8;color:#6d4a58;font-size:14px;">
+      <b>男友即時狀態監測</b><br>
+      名稱：林宏翰<br>
+      危險程度：過度可愛<br>
+      目前狀態：被女友瘋狂想念中<br>
+      系統建議：請立刻抱一下。
     </div>
-  </div>
-</div>
 
-<div id="t-courts" class="sec">
-  <div id="carea"><div class="empty">請先完成設定並點擊「自動排場」</div></div>
-</div>
+    <div class="footer">Made with love ♡</div>
+  </main>
 
-<div id="t-history" class="sec">
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-      <span style="font-weight:500;font-size:15px" id="today-lbl"></span>
-      <button class="btn btn-sm" onclick="clearHistory()" style="color:#A32D2D;border-color:#A32D2D">清除今日紀錄</button>
-    </div>
-    <div class="sg" id="hstats"></div>
-  </div>
-  <div class="card">
-    <div class="sec-lbl">個人上場統計</div>
-    <table><thead><tr><th>球員</th><th>等級</th><th>上場</th><th>累計時長</th></tr></thead>
-    <tbody id="htable"></tbody></table>
-  </div>
-  <div class="card">
-    <div class="sec-lbl">場次紀錄</div>
-    <div id="glog"></div>
-  </div>
-</div>
-</div>
+  <script>
+    const text = "今天不是什麼特別厲害的作品，\n只是我突然很想讓你知道：\n林宏翰，我真的、真的很愛你。";
+    const typing = document.getElementById("typing");
+    let index = 0;
 
-<script>
-const SK='bdm_v4';
-const TODAY=new Date().toLocaleDateString('zh-TW',{year:'numeric',month:'2-digit',day:'2-digit'});
-let S={numCourts:2,players:[],courts:[],nextQueue:[],history:{},gameLog:[],lastSaved:TODAY};
-let timers={};
-let gameSeq=0;
-
-function lvC(lv){if(lv<=6)return{bg:'#B5D4F4',fg:'#0C447C'};if(lv<=12)return{bg:'#C0DD97',fg:'#27500A'};return{bg:'#FAC775',fg:'#633806'}}
-function pStyle(lv){const c=lvC(lv);return`background:${c.bg};color:${c.fg}`}
-function dotEl(lv){const c=lvC(lv);return`<span class="lv-dot" style="background:${c.bg};color:${c.fg}">${lv}</span>`}
-
-function save(){try{const d={...S,courts:[],nextQueue:[]};localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
-function load(){
-  try{
-    const raw=localStorage.getItem(SK);
-    if(!raw)return;
-    const d=JSON.parse(raw);
-    S.numCourts=d.numCourts||2;
-    S.players=d.players||[];
-    if(d.lastSaved===TODAY){S.history=d.history||{};S.gameLog=d.gameLog||[];gameSeq=S.gameLog.length;}
-    else{S.history={};S.gameLog=[];S.lastSaved=TODAY;}
-  }catch(e){}
-}
-
-function goTab(t){
-  ['setup','players','courts','history'].forEach((n,i)=>{
-    document.querySelectorAll('.tab')[i].classList.toggle('active',n===t);
-    document.getElementById('t-'+n).classList.toggle('active',n===t);
-  });
-  if(t==='history')renderHistory();
-  if(t==='courts')renderCourts();
-  if(t==='players'){renderPlayers();syncPcnt();}
-  if(t==='setup'){renderPSetup();syncSetup();}
-}
-
-function buildSelects(){
-  const opts=[...Array(18)].map((_,i)=>`<option value="${i+1}"${i===8?' selected':''}>Lv ${i+1}</option>`).join('');
-  ['plv','plv2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts;});
-}
-
-function adjCourts(d){
-  S.numCourts=Math.max(1,Math.min(10,S.numCourts+d));
-  document.getElementById('court-num-disp').textContent=S.numCourts;
-  save();
-}
-
-function addP(){
-  const n=document.getElementById('pname').value.trim();
-  const lv=parseInt(document.getElementById('plv').value);
-  if(!n)return;
-  if(S.players.find(p=>p.name===n)){alert('此球員已存在');return;}
-  S.players.push({id:Date.now(),name:n,level:lv});
-  if(!S.history[n])S.history[n]={count:0,totalSec:0,level:lv};
-  document.getElementById('pname').value='';
-  save();renderPSetup();syncPcnt();syncSetup();
-}
-function addP2(){
-  const n=document.getElementById('pname2').value.trim();
-  const lv=parseInt(document.getElementById('plv2').value);
-  if(!n)return;
-  if(S.players.find(p=>p.name===n)){alert('此球員已存在');return;}
-  S.players.push({id:Date.now(),name:n,level:lv});
-  if(!S.history[n])S.history[n]={count:0,totalSec:0,level:lv};
-  document.getElementById('pname2').value='';
-  save();renderPlayers();syncPcnt();renderPSetup();syncSetup();
-}
-function removeP(id){
-  S.players=S.players.filter(p=>p.id!==id);
-  save();renderPlayers();renderPSetup();syncPcnt();syncSetup();
-}
-
-function syncPcnt(){
-  const t=`共 ${S.players.length} 位球員`;
-  ['pcnt','pcnt-setup'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=S.players.length?t:'尚無球員';});
-}
-function syncSetup(){document.getElementById('court-num-disp').textContent=S.numCourts;}
-
-function renderPSetup(){
-  const el=document.getElementById('plist-setup');
-  if(!el)return;
-  el.innerHTML=S.players.map(p=>`
-    <div class="prow">
-      <span style="font-weight:500">${p.name}</span>
-      <div style="display:flex;gap:6px;align-items:center">
-        ${dotEl(p.level)}<span style="font-size:12px;color:${lvC(p.level).fg}">Lv${p.level}</span>
-        <button class="btn btn-red btn-sm" onclick="removeP(${p.id})">移除</button>
-      </div>
-    </div>`).join('');
-}
-function renderPlayers(){
-  const el=document.getElementById('plist');
-  if(!el)return;
-  el.innerHTML=S.players.map(p=>`
-    <div class="prow">
-      <span style="font-weight:500">${p.name}</span>
-      <div style="display:flex;gap:6px;align-items:center">
-        ${dotEl(p.level)}<span style="font-size:12px;color:${lvC(p.level).fg}">Lv${p.level}</span>
-        <button class="btn btn-red btn-sm" onclick="removeP(${p.id})">移除</button>
-      </div>
-    </div>`).join('');
-}
-
-function bestMatch4(pool){
-  const [a,b,c,d]=pool;
-  const opts=[
-    {tA:[a,b],tB:[c,d],diff:Math.abs(a.level+b.level-c.level-d.level)},
-    {tA:[a,c],tB:[b,d],diff:Math.abs(a.level+c.level-b.level-d.level)},
-    {tA:[a,d],tB:[b,c],diff:Math.abs(a.level+d.level-b.level-c.level)},
-  ];
-  return opts.sort((x,y)=>x.diff-y.diff)[0];
-}
-
-function doArrange(){
-  if(S.players.length<4){alert('至少需要 4 位球員才能排場');return;}
-  Object.values(timers).forEach(clearInterval);timers={};
-  S.courts=[];S.nextQueue=[];
-  const sorted=[...S.players].sort((a,b)=>b.level-a.level);
-  const pool=[...sorted];
-  const n=Math.min(S.numCourts,Math.floor(pool.length/4));
-  for(let i=0;i<n;i++){
-    const four=pool.splice(0,4);
-    const m=bestMatch4(four);
-    S.courts.push({id:i+1,teamA:m.tA,teamB:m.tB,status:'waiting',startTime:null,elapsed:0});
-  }
-  S.nextQueue=[...pool];
-  goTab('courts');
-}
-
-function startCourt(id){
-  const c=S.courts.find(x=>x.id===id);
-  if(!c||c.status==='playing')return;
-  c.status='playing';c.startTime=Date.now();c.elapsed=0;
-  [...c.teamA,...c.teamB].forEach(p=>{
-    if(!S.history[p.name])S.history[p.name]={count:0,totalSec:0,level:p.level};
-    S.history[p.name].count++;S.history[p.name].level=p.level;
-  });
-  save();
-  if(timers[id])clearInterval(timers[id]);
-  timers[id]=setInterval(()=>{
-    if(c.status==='playing'){
-      c.elapsed=Math.floor((Date.now()-c.startTime)/1000);
-      const el=document.getElementById(`tmr-${id}`);
-      if(el)el.textContent=fmtMS(c.elapsed);
+    function typeText() {
+      if (index < text.length) {
+        typing.textContent += text[index];
+        index++;
+        setTimeout(typeText, 75);
+      }
     }
-  },1000);
-  renderCourts();
-}
+    typeText();
 
-function endCourt(id){
-  const c=S.courts.find(x=>x.id===id);
-  if(!c)return;
-  if(timers[id])clearInterval(timers[id]);delete timers[id];
-  const elapsed=c.status==='playing'?c.elapsed:0;
-  const startDt=c.startTime?new Date(c.startTime):new Date();
-  const endDt=new Date(startDt.getTime()+elapsed*1000);
-  const startStr=fmtHHMM(startDt),endStr=fmtHHMM(endDt);
-  const mins=Math.round(elapsed/60);
-  [...c.teamA,...c.teamB].forEach(p=>{if(S.history[p.name])S.history[p.name].totalSec+=elapsed;});
-  gameSeq++;
-  S.gameLog.push({seq:gameSeq,court:id,teamA:c.teamA.map(p=>({name:p.name,level:p.level})),teamB:c.teamB.map(p=>({name:p.name,level:p.level})),startStr,endStr,mins});
-  save();
-  S.nextQueue.push(...c.teamA,...c.teamB);
-  if(S.nextQueue.length>=4){
-    S.nextQueue.sort((a,b)=>(S.history[a.name]||{count:0}).count-(S.history[b.name]||{count:0}).count);
-    const four=S.nextQueue.splice(0,4);
-    four.sort((a,b)=>b.level-a.level);
-    const m=bestMatch4(four);
-    c.teamA=m.tA;c.teamB=m.tB;c.status='waiting';c.startTime=null;c.elapsed=0;
-  } else {
-    S.courts=S.courts.filter(x=>x.id!==id);
-  }
-  renderCourts();
-}
+    function showSecret() {
+      const secret = document.getElementById("secret");
+      secret.style.display = "block";
+    }
 
-function fmtMS(s){return`${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`}
-function fmtHHMM(d){return d.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',hour12:false})}
-function fmtDur(s){const m=Math.floor(s/60);return m<60?`${m} 分`:`${Math.floor(m/60)} 時 ${m%60} 分`}
+    let loveCount = 0;
+    const messages = [
+      "想你 +1 ♡",
+      "女友撒嬌額度增加中 ♡",
+      "林宏翰專屬偏愛已啟動 ♡",
+      "警告：女友愛意持續暴增中 ♡",
+      "系統錯誤：愛你愛太多了 ♡"
+    ];
 
-function renderCourts(){
-  const el=document.getElementById('carea');
-  if(!S.courts.length){el.innerHTML=`<div class="empty">請先完成設定並點擊「自動排場」</div>`;return;}
-  let html=`<div class="courts-grid">`;
-  S.courts.forEach(c=>{
-    const isP=c.status==='playing';
-    const sA=c.teamA.reduce((s,p)=>s+p.level,0),sB=c.teamB.reduce((s,p)=>s+p.level,0);
-    const startStr=c.startTime?fmtHHMM(new Date(c.startTime)):'—';
-    html+=`<div class="court-box">
-      <div class="court-hd">
-        <div style="display:flex;align-items:center;gap:7px">
-          <span style="font-weight:500">球場 ${c.id}</span>
-          ${isP?`<span class="tag" style="background:#EAF3DE;color:#27500A">進行中</span>`:`<span class="tag" style="background:#F1EFE8;color:#5F5E5A">等待</span>`}
-          <span class="hint">強度差 ${Math.abs(sA-sB)}</span>
-        </div>
-        <div style="display:flex;gap:5px">
-          ${!isP?`<button class="btn btn-green btn-sm" onclick="startCourt(${c.id})">▶ 上場</button>`:''}
-          ${isP?`<button class="btn btn-amber btn-sm" onclick="endCourt(${c.id})">■ 結束</button>`:''}
-        </div>
-      </div>
-      <div class="court-bd">
-        <div style="margin-bottom:5px;display:flex;gap:5px;align-items:center;flex-wrap:wrap">
-          <span style="font-size:11px;color:#888;min-width:48px">隊A (${sA})</span>
-          ${c.teamA.map(p=>`<span class="pill" style="${pStyle(p.level)}">${p.name} ${p.level}</span>`).join('')}
-        </div>
-        <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">
-          <span style="font-size:11px;color:#888;min-width:48px">隊B (${sB})</span>
-          ${c.teamB.map(p=>`<span class="pill" style="${pStyle(p.level)}">${p.name} ${p.level}</span>`).join('')}
-        </div>
-        ${isP?`<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e8e5dd;display:flex;justify-content:space-between;align-items:center">
-          <span class="hint">開始 ${startStr}</span>
-          <span class="timer-big" id="tmr-${c.id}">${fmtMS(c.elapsed)}</span>
-        </div>`:''}
-      </div>
-    </div>`;
-  });
-  html+=`</div>`;
-  if(S.nextQueue.length>0){
-    html+=`<div class="card" style="border:1px solid #378ADD55">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
-        <span style="font-size:13px;font-weight:500">候補隊伍</span>
-        <span class="tag" style="background:#EEEDFE;color:#3C3489">等待 ${S.nextQueue.length} 人</span>
-      </div>
-      <div style="display:flex;gap:5px;flex-wrap:wrap">
-        ${S.nextQueue.map(p=>`<span class="pill" style="${pStyle(p.level)}">${p.name} ${p.level}</span>`).join('')}
-      </div>
-    </div>`;
-  }
-  el.innerHTML=html;
-}
+    function loveCounter() {
+      const text = document.getElementById("counterText");
+      text.innerHTML = messages[loveCount % messages.length];
+      loveCount++;
+    }
 
-function clearHistory(){
-  if(!confirm('確定要清除今日所有紀錄嗎？'))return;
-  S.history={};S.gameLog=[];gameSeq=0;save();renderHistory();
-}
+    const runBtn = document.getElementById("runBtn");
 
-function renderHistory(){
-  document.getElementById('today-lbl').textContent=`今日紀錄 — ${TODAY}`;
-  const entries=Object.entries(S.history);
-  const totalPPL=entries.reduce((s,[,h])=>s+h.count,0);
-  const maxCt=Math.max(...entries.map(([,h])=>h.count),0);
-  document.getElementById('hstats').innerHTML=`
-    <div class="sc"><div class="sn">${entries.length}</div><div class="sl">球員人數</div></div>
-    <div class="sc"><div class="sn">${S.numCourts}</div><div class="sl">球場數量</div></div>
-    <div class="sc"><div class="sn">${S.gameLog.length}</div><div class="sl">完成場次</div></div>
-    <div class="sc"><div class="sn">${totalPPL}</div><div class="sl">總上場人次</div></div>
-    <div class="sc"><div class="sn">${maxCt}</div><div class="sl">最多上場次</div></div>`;
-  const sorted=entries.sort((a,b)=>b[1].count-a[1].count);
-  document.getElementById('htable').innerHTML=sorted.map(([name,h],i)=>`<tr>
-    <td style="font-weight:${i<3?'500':'400'}">${['①','②','③'][i]||''}${i<3?' ':''} ${name}</td>
-    <td>${dotEl(h.level)}</td>
-    <td>${h.count} 次</td>
-    <td>${fmtDur(h.totalSec)}</td>
-  </tr>`).join('');
-  if(!S.gameLog.length){document.getElementById('glog').innerHTML=`<div class="empty">今日尚無完成場次</div>`;return;}
-  document.getElementById('glog').innerHTML=S.gameLog.slice().reverse().map(g=>`
-    <div style="padding:9px 0;border-bottom:1px solid #e8e5dd">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;flex-wrap:wrap;gap:4px">
-        <span style="font-weight:500">第 ${g.seq} 場 · 球場 ${g.court}</span>
-        <span class="hint">${g.startStr} → ${g.endStr}（${g.mins} 分鐘）</span>
-      </div>
-      <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
-        ${g.teamA.map(p=>`<span class="pill" style="${pStyle(p.level)}">${p.name} ${p.level}</span>`).join('')}
-        <span style="color:#888;font-size:12px">vs</span>
-        ${g.teamB.map(p=>`<span class="pill" style="${pStyle(p.level)}">${p.name} ${p.level}</span>`).join('')}
-      </div>
-    </div>`).join('');
-}
+    runBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 220 - 110;
+      const y = Math.random() * 80 - 40;
+      runBtn.style.transform = `translate(${x}px, ${y}px)`;
+      runBtn.innerText = "系統不允許這個選項 ♡";
+    });
 
-load();buildSelects();renderPSetup();renderPlayers();syncPcnt();syncSetup();
-</script>
+    const heartBg = document.getElementById("heartBg");
+    for (let i = 0; i < 22; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "♡";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDelay = Math.random() * 8 + "s";
+      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      heart.style.fontSize = 14 + Math.random() * 18 + "px";
+      heartBg.appendChild(heart);
+    }
+  </script>
 </body>
 </html>
