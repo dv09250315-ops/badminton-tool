@@ -1,284 +1,638 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>只給你看的小驚喜</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
 
-    body {
-      min-height: 100vh;
-      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
-      background: linear-gradient(135deg, #fff1f5, #fdf7ff, #eef7ff);
-      color: #3b2f35;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      overflow: hidden;
-    }
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
-    .heart-bg {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .heart {
-      position: absolute;
-      color: rgba(255, 120, 160, 0.35);
-      animation: floatUp 8s linear infinite;
-      font-size: 18px;
-    }
+  .app {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: linear-gradient(135deg, #ffe8f0 0%, #ffd6e7 50%, #ffedf5 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
 
-    @keyframes floatUp {
-      0% { transform: translateY(110vh) scale(0.8); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
-    }
+  .phone {
+    background: #fff8fb;
+    border-radius: 36px;
+    border: 2.5px solid #f0b8cc;
+    width: 340px;
+    padding: 20px 16px 28px;
+    box-shadow: 0 8px 32px rgba(220,100,140,0.18), 0 2px 8px rgba(220,100,140,0.10);
+    position: relative;
+    overflow: hidden;
+  }
 
-    .card {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      width: 340px;
-      min-height: 590px;
-      max-width: 100%;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 42px;
-      box-shadow: 0 20px 60px rgba(188, 117, 146, 0.22);
-      padding: 48px 20px 24px;
-      text-align: center;
-      overflow: hidden;
-    }
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #b06080;
+    padding: 0 4px 12px;
+  }
 
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: #fff0f5;
-      color: #c45b83;
-      font-size: 13px;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-    }
+  .title-area {
+    text-align: center;
+    margin-bottom: 14px;
+  }
 
-    h1 {
-      font-size: 21px;
-      line-height: 1.45;
-      margin-bottom: 8px;
-      color: #3a2a31;
-    }
+  .title-area h1 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #c05070;
+    letter-spacing: 1px;
+  }
 
-    .typewriter {
-      min-height: 62px;
-      font-size: 14px;
-      line-height: 1.7;
-      color: #5d4b53;
-      margin: 10px 0 12px;
-      white-space: pre-line;
-    }
+  .subtitle {
+    font-size: 12px;
+    color: #e07090;
+    margin-top: 4px;
+    letter-spacing: 2px;
+  }
 
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 18px;
-      background: #d96c94;
-      margin-left: 3px;
-      animation: blink 0.8s infinite;
-      vertical-align: middle;
-    }
+  .dashes {
+    color: #f0b0c0;
+    font-size: 12px;
+  }
 
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
+  .card {
+    background: #fffafa;
+    border-radius: 18px;
+    border: 1.5px solid #f5ccd8;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
 
-    .status {
-      background: #2d2730;
-      color: #fff;
-      border-radius: 18px;
-      padding: 12px;
-      text-align: left;
-      font-family: Consolas, monospace;
-      font-size: 11px;
-      line-height: 1.55;
-      margin: 12px 0;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
-    }
+  .bf-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
 
-    .status span {
-      color: #ffb6cf;
-    }
+  .avatar-area {
+    position: relative;
+    flex-shrink: 0;
+  }
 
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 18px;
-      padding: 11px 14px;
-      background: linear-gradient(135deg, #ff8fb3, #ffb2c9);
-      color: white;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 22px rgba(255, 129, 173, 0.35);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
+  .avatar-bubble {
+    background: #f8e8ed;
+    border-radius: 12px;
+    border: 1.5px solid #f0c0cc;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #c06070;
+    margin-bottom: 6px;
+    position: relative;
+    text-align: center;
+  }
 
-    button:active {
-      transform: scale(0.97);
-      box-shadow: 0 6px 14px rgba(255, 129, 173, 0.3);
-    }
+  .avatar-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #f0c0cc;
+  }
 
-    .secret {
-      display: none;
-      margin-top: 22px;
-      padding: 18px;
-      background: #fff6f9;
-      border: 1px dashed #f2a7bf;
-      border-radius: 20px;
-      color: #6b4655;
-      line-height: 1.55;
-      font-size: 12px;
-      animation: fadeIn .6s ease forwards;
-    }
+  .avatar-emoji {
+    font-size: 52px;
+    line-height: 1;
+    display: block;
+    text-align: center;
+    filter: drop-shadow(0 2px 4px rgba(200,80,120,0.2));
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .avatar-emoji:active { transform: scale(0.92); }
 
-    .footer {
-      margin-top: 24px;
-      font-size: 12px;
-      color: #9b7b88;
-    }
-  </style>
-</head>
-<body>
-  <div class="heart-bg" id="heartBg"></div>
+  .bf-info {
+    flex: 1;
+  }
 
-  <main class="card">
-    <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:140px;height:30px;background:#1f1f1f;border-radius:20px;z-index:5;"></div>
-    <div class="badge">林宏翰戀愛檢測系統 v5.20</div>
-    <h1>系統偵測到<br>你最近有點太可愛了</h1>
+  .live-badge {
+    background: #ffd6e0;
+    color: #c0405a;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
 
-    <div class="typewriter">
-      <span id="typing"></span><span class="cursor"></span>
+  .live-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: #e05070;
+    border-radius: 50%;
+    margin-left: 4px;
+    animation: pulse 1.2s infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .info-row {
+    font-size: 12.5px;
+    color: #804060;
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+
+  .info-row .highlight {
+    color: #e05070;
+    font-weight: 600;
+  }
+
+  .hearts-row {
+    display: flex;
+    gap: 3px;
+    font-size: 14px;
+  }
+
+  .heart-beat {
+    animation: heartbeat 1.4s infinite;
+    display: inline-block;
+  }
+
+  .heart-beat:nth-child(2) { animation-delay: 0.2s; }
+  .heart-beat:nth-child(3) { animation-delay: 0.4s; }
+  .heart-beat:nth-child(4) { animation-delay: 0.6s; }
+  .heart-beat:nth-child(5) { animation-delay: 0.8s; }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.3); }
+    60% { transform: scale(1); }
+  }
+
+  .btn-main {
+    background: linear-gradient(135deg, #f9a8c0 0%, #f07090 100%);
+    border-radius: 16px;
+    border: none;
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    width: 100%;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(240,100,140,0.30);
+  }
+
+  .btn-main:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240,100,140,0.40); }
+  .btn-main:active { transform: scale(0.97); }
+
+  .btn-main .sub {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.9;
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 2px;
+  }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    animation: rippleAnim 0.5s ease-out forwards;
+    pointer-events: none;
+  }
+
+  @keyframes rippleAnim {
+    from { transform: scale(0); opacity: 1; }
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  .escape-card {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .escape-title {
+    font-size: 12px;
+    color: #a07080;
+    margin-bottom: 8px;
+  }
+
+  .btn-escape {
+    background: #f07090;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 22px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.1s;
+    letter-spacing: 1px;
+  }
+
+  .escape-hint {
+    font-size: 11px;
+    color: #c07080;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .escape-hint.show { opacity: 1; }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .mini-card {
+    background: #fffafa;
+    border: 1.5px solid #f5ccd8;
+    border-radius: 16px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .mini-card:hover { border-color: #f0a0b8; background: #fff0f5; }
+  .mini-card:active { transform: scale(0.94); }
+
+  .mini-card-title {
+    font-size: 11px;
+    color: #c07090;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .mini-card-emoji {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 6px;
+    transition: transform 0.2s;
+  }
+
+  .mini-card:hover .mini-card-emoji { transform: scale(1.2); }
+
+  .mini-card-sub {
+    font-size: 10px;
+    color: #d09090;
+    line-height: 1.3;
+  }
+
+  .system-card {
+    background: #f5f8ee;
+    border: 1.5px solid #d8e8b0;
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .system-text {
+    font-size: 12px;
+    color: #708060;
+    flex: 1;
+  }
+
+  .system-title {
+    font-size: 11px;
+    color: #90a070;
+    margin-bottom: 3px;
+  }
+
+  .system-robot {
+    font-size: 30px;
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 10px;
+    color: #d0a0b0;
+    margin-top: 12px;
+  }
+
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(240,100,130,0.92);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Noto Sans TC', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 100;
+    letter-spacing: 1px;
+    text-align: center;
+    max-width: 260px;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .counter-badge {
+    display: inline-block;
+    background: #f07090;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    margin-left: 4px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .sparkle {
+    position: absolute;
+    pointer-events: none;
+    font-size: 18px;
+    animation: sparkleAnim 0.8s ease-out forwards;
+    z-index: 50;
+  }
+
+  @keyframes sparkleAnim {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(0.3); opacity: 0; }
+  }
+</style>
+
+<div class="app" id="app">
+  <div class="phone">
+
+    <div class="status-bar">
+      <span>20:23 ♡</span>
+      <span>📶 🔋</span>
     </div>
 
-    <div class="status">
-      > 正在掃描林宏翰... <span>100%</span><br>
-      > 羽球成癮程度：<span>過高</span><br>
-      > 被女友偷想次數：<span>∞</span><br>
-      > 系統結論：<span>這男的不能放生</span>
+    <div class="title-area">
+      <h1>💗 林宏翰 專屬戀愛系統 💗</h1>
+      <div class="subtitle"><span class="dashes">- - - - - -</span> 520特別版 <span class="dashes">- - - - - -</span></div>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-      <button onclick="showSecret()">查看機密資料</button>
-      <button onclick="loveCounter()">不要亂點</button>
-      <button id="runBtn">不愛女友</button>
+    <div class="card bf-card">
+      <div class="avatar-area">
+        <div class="avatar-bubble" id="bubble">救命<br>有人想我欸</div>
+        <span class="avatar-emoji" id="avatar" onclick="pokeBoyfriend(event)">🧑‍🦱</span>
+      </div>
+      <div class="bf-info">
+        <span class="live-badge">男友即時狀態 <span class="live-dot"></span></span>
+        <div class="info-row">名稱：林宏翰</div>
+        <div class="info-row">危險程度：<span class="highlight">超級可愛</span></div>
+        <div class="info-row" id="status-row">目前狀態：被女友鎖定中</div>
+        <div class="info-row">
+          想念指數：
+          <span class="hearts-row">
+            <span class="heart-beat">💗</span>
+            <span class="heart-beat">💗</span>
+            <span class="heart-beat">💗</span>
+            <span class="heart-beat">💗</span>
+            <span class="heart-beat">💗</span>
+          </span>
+        </div>
+        <div class="info-row">系統建議：快點去抱他 🐻</div>
+      </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
-      <button onclick="choiceLove('A')">請女友吃飯</button>
-      <button onclick="choiceLove('B')">帶女友打球</button>
+    <button class="btn-main" id="claimBtn" onclick="claimGirlfriend(event)">
+      <span>🔐</span>
+      <span>
+        領走女友
+        <span class="sub">一鍵綁定，永久有效</span>
+      </span>
+      <span>👆</span>
+    </button>
+
+    <div class="card escape-card">
+      <div class="escape-title">不愛女友按鈕（會跑）💥</div>
+      <div style="position:relative; min-height: 44px;">
+        <button class="btn-escape" id="escapeBtn" onmouseenter="runAway()" onclick="runAway()">不愛女友</button>
+        <div class="escape-hint" id="escapeHint">嘿嘿 抓不到我～</div>
+      </div>
     </div>
 
-    <div id="counterText" style="margin-top:16px;color:#c05f84;font-size:14px;font-weight:600;"></div>
-
-    <div class="secret" id="secret">
-      <div style="font-size:16px;margin-bottom:8px;">⚠ 系統通知 ⚠</div>
-      驗證成功。<br>
-      你已成功綁定：<br>
-      「張予柔限定女友系統」<br><br>
-      已解鎖功能：<br>
-      ✓ 自動分享廢片<br>
-      ✓ 打球碎念模式<br>
-      ✓ 隨機出現想你通知<br>
-      ✓ 偶爾很黏人<br><br>
-      注意：目前暫時無法解除綁定。
+    <div class="mini-grid">
+      <div class="mini-card" onclick="missYou(event)">
+        <div class="mini-card-title">想你 <span class="counter-badge" id="missCount">0</span></div>
+        <span class="mini-card-emoji">🩷</span>
+        <div class="mini-card-sub">點一下就想你</div>
+      </div>
+      <div class="mini-card" onclick="pout(event)">
+        <div class="mini-card-title">撒嬌發動</div>
+        <span class="mini-card-emoji">🐻</span>
+        <div class="mini-card-sub">啟動女友模式</div>
+      </div>
+      <div class="mini-card" onclick="giveCrown(event)">
+        <div class="mini-card-title">寶寶稱號</div>
+        <span class="mini-card-emoji">👑</span>
+        <div class="mini-card-sub">自動頒發給你</div>
+      </div>
     </div>
 
-    <div style="margin-top:12px;background:#fff8fb;border-radius:16px;padding:10px;border:1px solid #ffd5e4;line-height:1.55;color:#6d4a58;font-size:11px;">
-      <b>男友狀態監測</b><br>
-      名稱：林宏翰｜狀態：女友上頭中<br>
-      系統建議：請投餵食物安撫。
+    <div class="system-card">
+      <div class="system-text">
+        <div class="system-title">系統訊息</div>
+        <div id="systemMsg">林宏翰已被女友深深喜歡，無法解除。</div>
+      </div>
+      <div class="system-robot">🤖</div>
     </div>
 
-    <div class="footer">Made with love ♡</div>
-  </main>
+    <div class="footer">© 2024 Girlfriend System 💗</div>
+  </div>
 
-  <script>
-    const text = "系統分析中...\\n最近有一位張姓女子\\n對你產生嚴重依賴。";
-    const typing = document.getElementById("typing");
-    let index = 0;
+  <div class="toast" id="toast"></div>
+</div>
 
-    function typeText() {
-      if (index < text.length) {
-        typing.textContent += text[index];
-        index++;
-        setTimeout(typeText, 75);
-      }
-    }
-    typeText();
+<script>
+  const bubbles = [
+    "救命\n有人想我欸",
+    "被盯上了！",
+    "好可愛嗚嗚",
+    "不要這樣…",
+    "超開心的啦！",
+    "笑死哈哈哈",
+    "♡ ♡ ♡"
+  ];
 
-    function showSecret() {
-      const secret = document.getElementById("secret");
-      secret.style.display = "block";
-    }
+  const statuses = [
+    "被女友鎖定中",
+    "正在臉紅中 🥺",
+    "瘋狂傻笑中 😊",
+    "被愛淹沒中 💗",
+    "只想見你中 🌸",
+    "戀愛模式全開 🔥"
+  ];
 
-    let loveCount = 0;
-    const messages = [
-      "警告：女友想你次數過多",
-      "系統錯誤：林宏翰過於欠抱",
-      "已自動幫你加入女友黑名單（誤）",
-      "今日親親額度 +1",
-      "系統判定：這男的有點重要"
-    ];
+  let pokeCount = 0;
+  let missCount = 0;
+  let claimed = false;
 
-    function loveCounter() {
-      const text = document.getElementById("counterText");
-      text.innerHTML = messages[loveCount % messages.length];
-      loveCount++;
-    }
+  function showToast(msg, duration = 2000) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), duration);
+  }
 
-    function choiceLove(type) {
-      const text = document.getElementById("counterText");
-      text.innerHTML = type === 'A'
-        ? "選擇成功：今天已被女友愛爆 ♡"
-        : "系統紀錄：明天也逃不掉 ♡";
-    }
+  function spawnSparkle(el, emoji = '✨') {
+    const rect = el.getBoundingClientRect();
+    const appRect = document.getElementById('app').getBoundingClientRect();
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.textContent = emoji;
+    s.style.left = (rect.left - appRect.left + rect.width / 2 - 10 + (Math.random() - 0.5) * 30) + 'px';
+    s.style.top = (rect.top - appRect.top + (Math.random() - 0.5) * 20) + 'px';
+    document.getElementById('app').appendChild(s);
+    setTimeout(() => s.remove(), 900);
+  }
 
-    const runBtn = document.getElementById("runBtn");
+  function addRipple(btn, e) {
+    const rect = btn.getBoundingClientRect();
+    const r = document.createElement('div');
+    r.className = 'ripple';
+    const size = Math.max(rect.width, rect.height) * 1.5;
+    r.style.width = r.style.height = size + 'px';
+    r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    r.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    btn.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+  }
 
-    runBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 220 - 110;
-      const y = Math.random() * 80 - 40;
-      runBtn.style.transform = `translate(${x}px, ${y}px)`;
-      runBtn.innerText = "你沒有這個選項";
+  function pokeBoyfriend(e) {
+    pokeCount++;
+    const ava = document.getElementById('avatar');
+    const bub = document.getElementById('bubble');
+    const statusEl = document.getElementById('status-row');
+
+    ava.style.transform = 'scale(1.25) rotate(-10deg)';
+    setTimeout(() => ava.style.transform = '', 300);
+
+    bub.textContent = bubbles[pokeCount % bubbles.length];
+
+    const idx = Math.floor(Math.random() * statuses.length);
+    statusEl.textContent = '目前狀態：' + statuses[idx];
+
+    const emojis = ['💗','🌸','✨','💕','🎀'];
+    emojis.forEach((em, i) => {
+      setTimeout(() => spawnSparkle(ava, em), i * 80);
     });
 
-    const heartBg = document.getElementById("heartBg");
-    for (let i = 0; i < 22; i++) {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "♡";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDelay = Math.random() * 8 + "s";
-      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-      heart.style.fontSize = 14 + Math.random() * 18 + "px";
-      heartBg.appendChild(heart);
+    if (pokeCount === 3) showToast('一直戳他喔！太可愛了 💗');
+    if (pokeCount === 7) showToast('戳了 7 下！你真的很喜歡他 🥺');
+    if (pokeCount === 15) showToast('好了好了別戳啦 他臉紅了 😳');
+  }
+
+  function claimGirlfriend(e) {
+    addRipple(document.getElementById('claimBtn'), e);
+    if (!claimed) {
+      claimed = true;
+      document.getElementById('claimBtn').style.background = 'linear-gradient(135deg, #a0d8a0 0%, #60b870 100%)';
+      document.getElementById('claimBtn').innerHTML = '<span>✅</span><span>已綁定！永久有效<span class="sub">林宏翰的女友就是你</span></span><span>💍</span>';
+      document.getElementById('systemMsg').textContent = '綁定成功！林宏翰正式被領走，不退不換。';
+      showToast('🎉 恭喜！成功領走林宏翰！', 3000);
+    } else {
+      showToast('已經綁定了啦！放心 💗', 1500);
     }
-  </script>
-</body>
-</html>
+  }
+
+  function runAway() {
+    const btn = document.getElementById('escapeBtn');
+    const hint = document.getElementById('escapeHint');
+    const card = btn.closest('.card');
+    const cardRect = card.getBoundingClientRect();
+    const maxX = cardRect.width - btn.offsetWidth - 20;
+    const maxY = 8;
+    const rx = Math.floor(Math.random() * maxX);
+    btn.style.position = 'relative';
+    btn.style.left = rx + 'px';
+    hint.classList.add('show');
+    setTimeout(() => hint.classList.remove('show'), 800);
+  }
+
+  function missYou(e) {
+    missCount++;
+    document.getElementById('missCount').textContent = missCount;
+    spawnSparkle(e.currentTarget, '💗');
+    spawnSparkle(e.currentTarget, '🌸');
+
+    const msgs = [
+      '想你了 💗',
+      '超想你的！',
+      '又想你了 🥺',
+      `已想你 ${missCount} 次 💕`,
+      '想到不行了啦！',
+    ];
+    if (missCount <= 5 || missCount % 5 === 0) {
+      showToast(msgs[Math.min(missCount - 1, 3)].replace('X', missCount), 1500);
+    }
+  }
+
+  function pout(e) {
+    spawnSparkle(e.currentTarget, '🐻');
+    spawnSparkle(e.currentTarget, '💕');
+    const msgs = [
+      '人家要抱抱～ 🐻',
+      '哼！不理你了！（才不是）',
+      '你最好趕快來陪我！',
+      '女友撒嬌模式啟動 🌸',
+      '快說我最可愛！',
+    ];
+    showToast(msgs[Math.floor(Math.random() * msgs.length)], 2000);
+    document.getElementById('systemMsg').textContent = '警告：女友正在撒嬌，請立即給予抱抱！';
+  }
+
+  function giveCrown(e) {
+    spawnSparkle(e.currentTarget, '👑');
+    spawnSparkle(e.currentTarget, '✨');
+    const names = ['寶寶', '小可愛', '我的小熊', '心肝', '甜甜圈'];
+    const chosen = names[Math.floor(Math.random() * names.length)];
+    showToast(`頒發稱號：「${chosen}」給林宏翰 👑`, 2200);
+    document.getElementById('systemMsg').textContent = `林宏翰的專屬稱號：「${chosen}」 👑`;
+  }
+</script>
