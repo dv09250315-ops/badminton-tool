@@ -48,14 +48,17 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 430px;
+      width: 390px;
+      min-height: 844px;
+      max-width: 100%;
       background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 28px;
+      border-radius: 42px;
       box-shadow: 0 20px 60px rgba(188, 117, 146, 0.22);
-      padding: 34px 26px;
+      padding: 58px 28px 42px;
       text-align: center;
+      overflow: hidden;
     }
 
     .badge {
@@ -165,6 +168,7 @@
   <div class="heart-bg" id="heartBg"></div>
 
   <main class="card">
+    <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:140px;height:30px;background:#1f1f1f;border-radius:20px;z-index:5;"></div>
     <div class="badge">SYSTEM LOVE CHECK</div>
     <h1>嘿，林宏翰<br>這是一個只給你看的小網頁</h1>
 
