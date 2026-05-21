@@ -2,8 +2,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body,html{font-family:'Noto Sans TC',sans-serif}
-.wrap{background:#fff5f8;min-height:100vh;padding:16px 12px 28px;display:flex;flex-direction:column;align-items:center}
+.wrap{background:#fff5f8;padding:16px 12px 28px;font-family:'Noto Sans TC',sans-serif;display:flex;flex-direction:column;align-items:center}
 .phone{width:100%;max-width:340px}
 .sbar{display:flex;justify-content:space-between;font-size:12px;color:#c07090;padding:0 4px 10px;font-weight:500}
 .ttl{text-align:center;margin-bottom:12px}
@@ -11,82 +10,61 @@ body,html{font-family:'Noto Sans TC',sans-serif}
 .ttl .sub{font-size:11px;color:#e07090;letter-spacing:3px;margin-top:3px}
 .card{background:#fff;border-radius:20px;border:1.5px solid #f5ccd8;padding:13px;margin-bottom:10px}
 
-/* SHUTTLECOCK COURT GAME */
-.court-wrap{position:relative;width:100%;height:180px;background:#e8f5e8;border-radius:16px;border:2px solid #90c870;overflow:hidden;cursor:pointer;user-select:none}
-.court-line{position:absolute;background:rgba(255,255,255,0.55)}
-.court-net{position:absolute;top:0;left:50%;width:2px;height:100%;background:#60a040}
-.court-hl{position:absolute;top:50%;left:10%;width:80%;height:1.5px;background:rgba(255,255,255,0.4)}
-.shuttle{position:absolute;font-size:28px;transition:none;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15))}
-.racket-l{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:38px;transition:transform 0.15s;cursor:pointer;user-select:none}
-.racket-r{position:absolute;right:10px;top:50%;transform:translateY(-50%) scaleX(-1);font-size:38px;transition:transform 0.15s;pointer-events:none;user-select:none}
-.smash-fx{position:absolute;font-size:20px;pointer-events:none;animation:fxAnim 0.6s ease-out forwards}
-@keyframes fxAnim{0%{opacity:1;transform:scale(0.5)}100%{opacity:0;transform:scale(2)}}
-.rally-count{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.85);border-radius:20px;padding:3px 14px;font-size:13px;font-weight:700;color:#3a8020}
-.court-msg{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.88);border-radius:14px;padding:4px 14px;font-size:11px;font-weight:600;color:#c03060;white-space:nowrap}
+.court-wrap{position:relative;width:100%;height:190px;background:#c8eab0;border-radius:16px;border:2px solid #78b050;overflow:hidden;cursor:crosshair;user-select:none}
+.net{position:absolute;top:0;left:50%;width:3px;height:100%;background:#5a9030;z-index:2}
+.net-top{position:absolute;top:0;left:46%;width:8%;height:6px;background:#3a7020;border-radius:0 0 4px 4px;z-index:3}
+.cline{position:absolute;background:rgba(255,255,255,0.5)}
+.rally-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);border-radius:20px;padding:3px 14px;font-size:12px;font-weight:700;color:#3a8020;z-index:5;white-space:nowrap}
+.court-tip{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.88);border-radius:14px;padding:4px 14px;font-size:11px;font-weight:700;color:#c03060;white-space:nowrap;z-index:5;transition:opacity 0.3s}
 
-/* BF CARD */
+.shuttle{position:absolute;z-index:4;pointer-events:none;transition:none}
+.shuttle svg{display:block}
+
+.smash-word{position:absolute;pointer-events:none;z-index:10;font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:15px;color:#e03060;text-shadow:0 1px 4px rgba(255,255,255,0.8);animation:wordPop 1.1s ease-out forwards;white-space:nowrap}
+@keyframes wordPop{0%{opacity:1;transform:translateY(0) scale(0.6)}20%{transform:translateY(-8px) scale(1.15)}80%{opacity:1;transform:translateY(-32px) scale(1)}100%{opacity:0;transform:translateY(-52px) scale(0.9)}}
+
+.sparkle{position:absolute;pointer-events:none;z-index:9;animation:spkAnim 0.8s ease-out forwards}
+@keyframes spkAnim{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(0.3) translateY(-44px)}}
+
+.prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#c07090;margin-bottom:4px}
+.prog-bg{background:#fde0ea;border-radius:20px;height:10px;overflow:hidden}
+.prog-fill{height:100%;background:#f06080;border-radius:20px;transition:width 0.5s ease}
+
+.score-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.sc{background:#fff;border:1.5px solid #f5ccd8;border-radius:14px;padding:10px;text-align:center}
+.sc-num{font-size:24px;font-weight:900;color:#e03060;line-height:1}
+.sc-lbl{font-size:10px;color:#c08090;margin-top:2px}
+
 .bf-row{display:flex;gap:10px;align-items:flex-start}
-.av-wrap{flex-shrink:0;text-align:center}
-.av-bub{background:#fde8ef;border:1.5px solid #f5b0c0;border-radius:10px;padding:4px 8px;font-size:10px;color:#c05070;margin-bottom:5px;line-height:1.4}
-.av{font-size:50px;display:block;cursor:pointer;transition:transform 0.2s;user-select:none}
-.av:active{transform:scale(0.88) rotate(-8deg)}
-.bf-info{flex:1}
-.live-b{background:#ffd6e0;color:#a03050;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:6px;letter-spacing:0.5px}
+.av-bub{background:#fde8ef;border:1.5px solid #f5b0c0;border-radius:10px;padding:4px 8px;font-size:10px;color:#c05070;margin-bottom:5px;line-height:1.5;text-align:center;min-height:32px}
+.av{font-size:48px;display:block;cursor:pointer;transition:transform 0.2s;user-select:none;text-align:center}
+.av:active{transform:scale(0.88) rotate(-10deg)}
+.live-b{background:#ffd6e0;color:#a03050;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:6px}
 .dot{display:inline-block;width:6px;height:6px;background:#e04060;border-radius:50%;margin-left:3px;animation:blink 1.1s infinite;vertical-align:middle}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .irow{font-size:12px;color:#804060;margin-bottom:4px;line-height:1.5}
 .irow .red{color:#e03060;font-weight:700}
-.hrow{display:flex;gap:2px;font-size:13px}
+.hrow{display:inline-flex;gap:2px;font-size:13px}
 .hb{animation:hbeat 1.3s infinite;display:inline-block}
 .hb:nth-child(2){animation-delay:.18s}.hb:nth-child(3){animation-delay:.36s}.hb:nth-child(4){animation-delay:.54s}.hb:nth-child(5){animation-delay:.72s}
 @keyframes hbeat{0%,100%{transform:scale(1)}35%{transform:scale(1.35)}}
 
-/* PROGRESS BAR */
-.prog-wrap{margin-bottom:10px}
-.prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#c07090;margin-bottom:4px}
-.prog-bg{background:#fde0ea;border-radius:20px;height:12px;overflow:hidden}
-.prog-fill{height:100%;background:#f06080;border-radius:20px;transition:width 0.4s ease}
-
-/* SCORE BOARD */
-.score-board{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.score-card{background:#fff;border:1.5px solid #f5ccd8;border-radius:14px;padding:10px;text-align:center}
-.score-num{font-size:26px;font-weight:900;color:#e03060;line-height:1}
-.score-lbl{font-size:10px;color:#c08090;margin-top:3px}
-
-/* ACTION BUTTONS */
-.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.act-btn{background:#fff;border:2px solid #f5ccd8;border-radius:16px;padding:12px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,border-color 0.2s,background 0.2s;position:relative;overflow:hidden;user-select:none}
-.act-btn:hover{border-color:#f090a8;background:#fff5f8}
-.act-btn:active{transform:scale(0.93)}
-.act-icon{font-size:26px;display:block;margin-bottom:5px;transition:transform 0.2s}
-.act-btn:hover .act-icon{transform:scale(1.2) rotate(-8deg)}
-.act-title{font-size:11px;font-weight:700;color:#c03060;margin-bottom:2px}
-.act-sub{font-size:10px;color:#d09090}
-
-/* MAIN BTN */
-.main-btn{width:100%;background:#f06080;border:none;border-radius:18px;color:#fff;font-family:'Noto Sans TC',sans-serif;font-size:16px;font-weight:700;padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;letter-spacing:1px;transition:transform 0.15s,background 0.3s;position:relative;overflow:hidden}
+.main-btn{width:100%;background:#f06080;border:none;border-radius:18px;color:#fff;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;letter-spacing:1px;transition:transform 0.15s;position:relative;overflow:hidden}
 .main-btn:hover{transform:translateY(-2px)}
 .main-btn:active{transform:scale(0.97)}
 .main-btn .sub2{font-size:10px;font-weight:400;opacity:0.88;display:block;margin-top:2px;letter-spacing:2px}
 
-/* SYSTEM */
 .sys-card{background:#f0f5e8;border:1.5px solid #c0d890;border-radius:16px;padding:11px 13px;display:flex;align-items:center;gap:10px}
-.sys-txt{flex:1;font-size:11.5px;color:#607040}
-.sys-ttl{font-size:10px;color:#8aaa50;margin-bottom:2px;font-weight:600}
-.sys-ico{font-size:28px;animation:spin3 3s ease-in-out infinite}
-@keyframes spin3{0%,100%{transform:rotate(0deg)}50%{transform:rotate(15deg)}}
+.sys-txt{flex:1;font-size:11.5px;color:#607040;line-height:1.6}
+.sys-ttl{font-size:10px;color:#8aaa50;margin-bottom:2px;font-weight:700}
+.sys-ico{font-size:26px;animation:bob 2.5s ease-in-out infinite;flex-shrink:0}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-/* TOAST */
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.75);background:rgba(225,60,100,0.93);color:#fff;padding:13px 24px;border-radius:20px;font-size:14px;font-weight:700;font-family:'Noto Sans TC',sans-serif;opacity:0;pointer-events:none;transition:opacity 0.3s,transform 0.3s;z-index:999;letter-spacing:1px;text-align:center;max-width:250px;line-height:1.5}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.75);background:rgba(220,50,90,0.94);color:#fff;padding:14px 26px;border-radius:22px;font-size:14px;font-weight:700;font-family:'Noto Sans TC',sans-serif;opacity:0;pointer-events:none;transition:opacity 0.28s,transform 0.28s;z-index:999;letter-spacing:1px;text-align:center;max-width:260px;line-height:1.6}
 .toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-
-/* SPARKLE */
-.sparkle{position:absolute;pointer-events:none;animation:spk 0.75s ease-out forwards;z-index:50;font-size:16px}
-@keyframes spk{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-55px) scale(0.2);opacity:0}}
-
-.footer{text-align:center;font-size:10px;color:#d0a0b0;margin-top:10px}
-.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.35);animation:rip 0.5s ease-out forwards;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.32);animation:rip 0.5s ease-out forwards;pointer-events:none}
 @keyframes rip{from{transform:scale(0);opacity:1}to{transform:scale(5);opacity:0}}
+.footer{text-align:center;font-size:10px;color:#d0a0b0;margin-top:10px}
 </style>
 
 <h2 class="sr-only">林宏翰專屬羽球戀愛互動系統</h2>
@@ -94,261 +72,218 @@ body,html{font-family:'Noto Sans TC',sans-serif}
 <div class="phone">
 
   <div class="sbar"><span>20:23 ♡</span><span>📶🔋</span></div>
-
   <div class="ttl">
-    <h1>🏸 林宏翰 羽球戀愛系統 🏸</h1>
+    <h1>🏸 林宏翰 專屬戀愛系統 🏸</h1>
     <div class="sub">— — 520 特別版 — —</div>
   </div>
 
-  <!-- COURT MINI GAME -->
   <div class="card" style="padding:10px">
-    <div style="font-size:11px;color:#c07090;font-weight:600;margin-bottom:7px;text-align:center">🏸 點擊球場揮拍！發動甜蜜殺球 💗</div>
-    <div class="court-wrap" id="court" onclick="hitShuttle(event)">
-      <div class="court-net"></div>
-      <div class="court-hl"></div>
-      <div class="court-line" style="top:0;left:10%;width:80%;height:1.5px"></div>
-      <div class="court-line" style="bottom:0;left:10%;width:80%;height:1.5px"></div>
-      <div class="court-line" style="top:0;left:10%;width:1.5px;height:100%"></div>
-      <div class="court-line" style="top:0;right:10%;width:1.5px;height:100%"></div>
-      <div class="rally-count" id="rallyNum">連擊 0</div>
-      <div id="shuttle" class="shuttle" style="left:25%;top:45%">🏸</div>
-      <div class="racket-l" id="racketL">🎾</div>
-      <div class="racket-r" id="racketR">🎾</div>
-      <div class="court-msg" id="courtMsg">點擊球場發動甜蜜攻勢！</div>
+    <div style="font-size:11px;color:#c07090;font-weight:700;margin-bottom:7px;text-align:center">點擊球場！每一球都是告白 💗</div>
+    <div class="court-wrap" id="court" onclick="hitCourt(event)">
+      <div class="net"></div>
+      <div class="net-top"></div>
+      <div class="cline" style="top:0;left:8%;width:84%;height:1.5px"></div>
+      <div class="cline" style="bottom:0;left:8%;width:84%;height:1.5px"></div>
+      <div class="cline" style="top:0;left:8%;width:1.5px;height:100%"></div>
+      <div class="cline" style="top:0;right:8%;width:1.5px;height:100%"></div>
+      <div class="cline" style="top:50%;left:8%;width:40%;height:1px;opacity:0.4"></div>
+      <div class="cline" style="top:50%;right:8%;width:40%;height:1px;opacity:0.4"></div>
+      <div class="rally-badge" id="rallyBadge">連擊 0</div>
+      <div id="shuttle" class="shuttle" style="left:22%;top:42%"></div>
+      <div class="court-tip" id="courtTip">點擊任意位置揮拍！</div>
     </div>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="card prog-wrap">
-    <div class="prog-lbl">
-      <span>💗 甜蜜指數</span><span id="sweetPct">0%</span>
-    </div>
+  <div class="card" style="padding:10px 13px 12px">
+    <div class="prog-lbl"><span>💗 甜蜜指數</span><span id="sweetPct">0%</span></div>
     <div class="prog-bg"><div class="prog-fill" id="sweetBar" style="width:0%"></div></div>
-    <div style="font-size:10px;color:#c09090;margin-top:5px;text-align:right" id="sweetLabel">快去揮拍提升甜蜜度！</div>
+    <div style="font-size:10px;color:#c09090;margin-top:4px;text-align:right" id="sweetLbl">快去揮拍提升甜蜜度！</div>
   </div>
 
-  <!-- SCORE BOARD -->
-  <div class="score-board">
-    <div class="score-card">
-      <div class="score-num" id="rallyScore">0</div>
-      <div class="score-lbl">🏸 最高連擊</div>
-    </div>
-    <div class="score-card">
-      <div class="score-num" id="totalHits">0</div>
-      <div class="score-lbl">💗 累積甜蜜點</div>
-    </div>
+  <div class="score-row">
+    <div class="sc"><div class="sc-num" id="maxRallyEl">0</div><div class="sc-lbl">🏸 最高連擊</div></div>
+    <div class="sc"><div class="sc-num" id="totalEl">0</div><div class="sc-lbl">💗 累積甜蜜點</div></div>
   </div>
 
-  <!-- BF STATUS -->
   <div class="card bf-row">
-    <div class="av-wrap">
-      <div class="av-bub" id="bfBub">救命<br>被愛追著打</div>
+    <div style="flex-shrink:0;text-align:center;width:80px">
+      <div class="av-bub" id="bfBub">救命<br>被愛打到了</div>
       <span class="av" id="bfAv" onclick="pokeAv(event)">🧑‍🦱</span>
     </div>
-    <div class="bf-info">
+    <div style="flex:1">
       <span class="live-b">男友狀態 <span class="dot"></span></span>
       <div class="irow">名稱：林宏翰</div>
-      <div class="irow">羽球等級：<span class="red">被女友完克</span></div>
-      <div class="irow" id="bfStatus">狀態：正在躲甜蜜殺球</div>
+      <div class="irow">危險程度：<span class="red">超級可愛</span></div>
+      <div class="irow" id="bfStatusEl">狀態：被甜蜜殺球追著跑</div>
       <div class="irow">想念指數：<span class="hrow"><span class="hb">💗</span><span class="hb">💗</span><span class="hb">💗</span><span class="hb">💗</span><span class="hb">💗</span></span></div>
+      <div class="irow">系統建議：快去抱他 🐻</div>
     </div>
   </div>
 
-  <!-- ACTION GRID -->
-  <div class="action-grid">
-    <div class="act-btn" onclick="doSmash(event)">
-      <span class="act-icon">💥</span>
-      <div class="act-title">愛情殺球</div>
-      <div class="act-sub">一擊必殺 ❤️‍🔥</div>
-    </div>
-    <div class="act-btn" onclick="doLob(event)">
-      <span class="act-icon">🌈</span>
-      <div class="act-title">甜蜜挑球</div>
-      <div class="act-sub">拋到他心裡</div>
-    </div>
-    <div class="act-btn" onclick="doNet(event)">
-      <span class="act-icon">🫶</span>
-      <div class="act-title">網前放小球</div>
-      <div class="act-sub">輕輕撩一下</div>
-    </div>
-    <div class="act-btn" onclick="doDouble(event)">
-      <span class="act-icon">👫</span>
-      <div class="act-title">混雙配對</div>
-      <div class="act-sub">永遠的搭檔</div>
-    </div>
-  </div>
-
-  <!-- MAIN BTN -->
-  <button class="main-btn" id="mainBtn" onclick="claimPartner(event)">
+  <button class="main-btn" id="mainBtn" onclick="claimBtn(event)">
     <span>🔐</span>
-    <span>領走球場伴侶<span class="sub2">一鍵綁定 · 永久有效</span></span>
+    <span>領走羽球男友<span class="sub2">一鍵綁定 · 永久有效</span></span>
     <span>🏸</span>
   </button>
 
-  <!-- SYSTEM MSG -->
   <div class="sys-card">
     <div class="sys-txt">
       <div class="sys-ttl">系統訊息</div>
-      <div id="sysMsg">林宏翰已被女友殺球鎖定，無法解除。</div>
+      <div id="sysMsg">林宏翰已被女友深深喜歡，無法解除。</div>
     </div>
     <div class="sys-ico">🤖</div>
   </div>
 
-  <div class="footer">© 2024 Badminton Love System 🏸💗</div>
+  <div class="footer">© 2024 Badminton Love System 🏸</div>
 </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-let rally=0, maxRally=0, totalHits=0, sweet=0, claimed=false;
-let shuttleX=25, shuttleY=45, vx=3.5, vy=2.2;
-let animId=null, lastClick=0;
+let rally=0,maxRally=0,total=0,sweet=0,claimed=false,lastHit=0;
 
-const bfBubs=["救命\n被愛追著打","球速太快了！","好想打你的球 😆","我防不住啦！","一直戳？！😳","哈哈哈笑死","真的好喜歡你","跑不掉啦 💗"];
-const bfStats=["正在躲甜蜜殺球","被粉紅殺球命中","連跑帶笑 😊","戀愛模式全開","想跟你打一輩子","被鎖定無法逃跑"];
-const sweetLabels=["快去揮拍提升甜蜜度！","有點感覺了 🥰","甜蜜值上升中！💕","超甜！超甜！","甜到無法呼吸 💗","已達最高甜蜜等級 👑"];
-const toastPool={smash:["殺球命中！+50甜蜜值 💥","愛情殺球一擊必殺！","哇！他被你KO了 💗"],lob:["甜蜜挑球！飛向他心裡 🌈","啊好高！好甜！","心型拋物線完成 💕"],net:["網前放小球 超撩人 😳","輕輕一放 心跳加速","他的臉紅了 🥺"],double:["混雙配對成功！永遠的搭檔 👫","球場上只有我們倆 💗","一輩子的球伴！"]};
+const loveWords=[
+  "我喜歡你 💗","你是我的寶貝","想跟你打一輩子","你超可愛的","我愛你啦笨蛋","只喜歡你一個","你是我的人 🔐",
+  "陪我打球好嗎","你讓我心跳加速","宏翰最棒了！","就決定是你了","喜歡你的笑","你是我最強搭檔","抱一下嘛～",
+  "跟你在一起好開心","永遠都喜歡你","你是我的小太陽","想牽你的手","一起練球好嗎？","你最好看了！",
+  "不許喜歡別人 😤","你好帥喔啦！","你是我的 OWO","愛你喔笨蛋","只有你才行"
+];
+
+const bfBubs=[
+  "救命\n被愛打到了","啊！好準！","我招架不住…","嘻嘻被發現了","臉好燙喔 🥺","喜歡你也是啦","哈哈哈哈哈","不要這樣嘛 😳"
+];
+const bfStats=[
+  "被甜蜜殺球追著跑","正在瘋狂臉紅中","笑到快掉球拍","被愛情鎖定中","戀愛模式全開","想把你藏起來","找不到防守方法"
+];
+const sweetLbls=["快去揮拍提升甜蜜度！","有點感覺了 🥰","甜蜜值上升中 💕","超甜！超甜！","甜到無法呼吸 💗","最高甜蜜等級 👑"];
 
 function toast(msg,dur=2200){
   const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
+  t.innerHTML=msg; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),dur);
 }
-function spk(el,em='✨'){
-  const rect=el.getBoundingClientRect();
-  const wr=document.getElementById('mainWrap').getBoundingClientRect();
-  const s=document.createElement('div'); s.className='sparkle'; s.textContent=em;
-  s.style.left=(rect.left-wr.left+rect.width/2-8+(Math.random()-0.5)*28)+'px';
-  s.style.top=(rect.top-wr.top+(Math.random()-0.5)*16)+'px';
-  document.getElementById('mainWrap').appendChild(s);
-  setTimeout(()=>s.remove(),900);
+
+function drawShuttle(x,y,angle){
+  const el=document.getElementById('shuttle');
+  el.style.left=x+'%'; el.style.top=y+'%';
+  const a=angle||Math.random()*360;
+  el.innerHTML=`<svg width="32" height="36" viewBox="0 0 32 36">
+    <ellipse cx="16" cy="10" rx="9" ry="7" fill="white" stroke="#ccc" stroke-width="1"/>
+    <line x1="16" y1="17" x2="16" y2="34" stroke="#e0c090" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="16" cy="34" rx="4" ry="2.5" fill="#f0d070" stroke="#c8a840" stroke-width="1"/>
+    <line x1="9" y1="13" x2="16" y2="34" stroke="#e8d090" stroke-width="1" opacity="0.6"/>
+    <line x1="23" y1="13" x2="16" y2="34" stroke="#e8d090" stroke-width="1" opacity="0.6"/>
+    <line x1="7" y1="10" x2="16" y2="34" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/>
+    <line x1="25" y1="10" x2="16" y2="34" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/>
+  </svg>`;
+  el.style.transform=`rotate(${a}deg)`;
 }
-function ripple(btn,e){
+
+function spawnWord(x,y){
+  const court=document.getElementById('court');
+  const word=loveWords[Math.floor(Math.random()*loveWords.length)];
+  const el=document.createElement('div');
+  el.className='smash-word';
+  el.style.left=(Math.max(5,Math.min(x-8,65)))+'%';
+  el.style.top=(Math.max(5,y-5))+'%';
+  el.textContent=word;
+  const colors=['#e03060','#c020a0','#d04080','#a040c0','#e06090','#b02060'];
+  el.style.color=colors[Math.floor(Math.random()*colors.length)];
+  court.appendChild(el);
+  setTimeout(()=>el.remove(),1200);
+}
+
+function spawnSparkle(x,y){
+  const court=document.getElementById('court');
+  const icons=['💗','🌸','✨','💕','⭐','🎀'];
+  for(let i=0;i<2;i++){
+    const s=document.createElement('div');
+    s.className='sparkle';
+    s.style.left=(x+(Math.random()-0.5)*18)+'%';
+    s.style.top=(y+(Math.random()-0.5)*14)+'%';
+    s.style.fontSize='16px';
+    s.textContent=icons[Math.floor(Math.random()*icons.length)];
+    court.appendChild(s);
+    setTimeout(()=>s.remove(),900);
+  }
+}
+
+function setSweet(v){
+  sweet=Math.min(100,Math.max(0,v));
+  const pct=Math.round(sweet)+'%';
+  document.getElementById('sweetPct').textContent=pct;
+  document.getElementById('sweetBar').style.width=pct;
+  const idx=Math.min(Math.floor(sweet/20),5);
+  document.getElementById('sweetLbl').textContent=sweetLbls[idx];
+}
+
+function hitCourt(e){
+  const now=Date.now();
+  if(now-lastHit<220) return;
+  lastHit=now;
+
+  const court=document.getElementById('court');
+  const rect=court.getBoundingClientRect();
+  const px=((e.clientX-rect.left)/rect.width)*100;
+  const py=((e.clientY-rect.top)/rect.height)*100;
+
+  drawShuttle(px-2,py-3);
+  spawnWord(px,py);
+  spawnSparkle(px,py);
+
+  rally++; total++;
+  if(rally>maxRally) maxRally=rally;
+  setSweet(sweet+3.5);
+  document.getElementById('maxRallyEl').textContent=maxRally;
+  document.getElementById('totalEl').textContent=total;
+  document.getElementById('rallyBadge').textContent='連擊 '+rally;
+
+  const tips=["又一球！💗","命中！🏸","殺球！✨","太準了！","甜蜜攻勢！","無法抵擋！","快接住！","愛情一擊！"];
+  document.getElementById('courtTip').textContent=tips[Math.floor(Math.random()*tips.length)];
+
+  if(rally%5===0){
+    document.getElementById('bfBub').innerHTML=bfBubs[Math.floor(Math.random()*bfBubs.length)].replace('\n','<br>');
+    document.getElementById('bfStatusEl').textContent='狀態：'+bfStats[Math.floor(Math.random()*bfStats.length)];
+    const av=document.getElementById('bfAv');
+    av.style.transform='scale(1.18) rotate(8deg)';
+    setTimeout(()=>av.style.transform='',250);
+  }
+
+  if(rally===10) toast('🏸 10連擊！你的愛已打穿球網 💗',2000);
+  if(rally===20) toast('💥 20連擊！林宏翰完全招架不住！',2200);
+  if(rally===30) toast('👑 30連擊！傳說級甜蜜攻勢達成！',2500);
+  if(rally===50) toast('🌟 50連擊！你真的超愛他的吧！！💗',3000);
+}
+
+function pokeAv(e){
+  const av=document.getElementById('bfAv');
+  av.style.transform='scale(1.2) rotate(-12deg)';
+  setTimeout(()=>av.style.transform='',280);
+  document.getElementById('bfBub').innerHTML=bfBubs[Math.floor(Math.random()*bfBubs.length)].replace('\n','<br>');
+  total++; setSweet(sweet+2);
+  document.getElementById('totalEl').textContent=total;
+  const word=loveWords[Math.floor(Math.random()*loveWords.length)];
+  toast(word,1600);
+}
+
+function claimBtn(e){
+  const btn=document.getElementById('mainBtn');
   const r=btn.getBoundingClientRect();
   const d=document.createElement('div'); d.className='ripple';
   const sz=Math.max(r.width,r.height)*2;
   d.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-r.left-sz/2}px;top:${e.clientY-r.top-sz/2}px`;
   btn.appendChild(d); setTimeout(()=>d.remove(),600);
-}
-function setSweet(v){
-  sweet=Math.min(100,v);
-  const pct=Math.round(sweet)+'%';
-  document.getElementById('sweetPct').textContent=pct;
-  document.getElementById('sweetBar').style.width=pct;
-  const idx=Math.floor(sweet/20);
-  document.getElementById('sweetLabel').textContent=sweetLabels[Math.min(idx,sweetLabels.length-1)];
-}
-function updateScores(){
-  document.getElementById('rallyScore').textContent=maxRally;
-  document.getElementById('totalHits').textContent=totalHits;
-}
-function bfReact(){
-  const bub=document.getElementById('bfBub');
-  bub.textContent=bfBubs[Math.floor(Math.random()*bfBubs.length)];
-  const stEl=document.getElementById('bfStatus');
-  stEl.textContent='狀態：'+bfStats[Math.floor(Math.random()*bfStats.length)];
-  const av=document.getElementById('bfAv');
-  av.style.transform='scale(1.2) rotate(8deg)';
-  setTimeout(()=>av.style.transform='',280);
-}
-
-function hitShuttle(e){
-  const now=Date.now();
-  if(now-lastClick<300) return;
-  lastClick=now;
-  rally++; totalHits++;
-  if(rally>maxRally) maxRally=rally;
-  setSweet(sweet+4);
-  updateScores();
-  document.getElementById('rallyNum').textContent='連擊 '+rally;
-
-  const court=document.getElementById('court');
-  const cRect=court.getBoundingClientRect();
-  const cx=((e.clientX-cRect.left)/cRect.width)*100;
-  const cy=((e.clientY-cRect.top)/cRect.height)*100;
-  shuttleX=cx; shuttleY=cy;
-  const sEl=document.getElementById('shuttle');
-  sEl.style.left=shuttleX+'%'; sEl.style.top=shuttleY+'%';
-  sEl.style.transform='rotate('+(Math.random()*360)+'deg)';
-
-  const rL=document.getElementById('racketL');
-  rL.style.transform='translateY(-50%) rotate(-25deg) scale(1.2)';
-  setTimeout(()=>rL.style.transform='translateY(-50%)',200);
-
-  const msgs=["殺球！💥","甜蜜一擊！","飛過去了！","連擊！🏸","超準的！💗","愛情殺球！"];
-  document.getElementById('courtMsg').textContent=msgs[Math.floor(Math.random()*msgs.length)];
-
-  const fx=document.createElement('div');
-  fx.className='smash-fx';
-  fx.style.cssText='left:'+cx+'%;top:'+cy+'%;';
-  fx.textContent=['💗','✨','🌸','💕','⚡'][Math.floor(Math.random()*5)];
-  court.appendChild(fx);
-  setTimeout(()=>fx.remove(),700);
-
-  if(rally%5===0) bfReact();
-  if(rally===10) toast('10連擊！你的愛情殺球無法擋 💥',2000);
-  if(rally===20) toast('20連擊！林宏翰已完全招架不住 💗',2200);
-  if(rally===30) toast('30連擊！傳說級羽球情侶達成！👑',2500);
-}
-
-function courtMissReset(){
-  if(rally>0){
-    const old=rally;
-    rally=0;
-    document.getElementById('rallyNum').textContent='連擊 0';
-    document.getElementById('courtMsg').textContent='連擊中斷…再來一次！';
-    if(old>=5) toast('哎呀！連擊中斷，從 '+old+' 重來！💦',1800);
-  }
-}
-
-function doSmash(e){
-  ripple(e.currentTarget,e);
-  spk(e.currentTarget,'💥'); spk(e.currentTarget,'💗');
-  setSweet(sweet+12); totalHits+=3; updateScores();
-  toast(toastPool.smash[Math.floor(Math.random()*3)]);
-  bfReact();
-  document.getElementById('sysMsg').textContent='警告：愛情殺球已命中，甜蜜傷害 MAX！';
-}
-function doLob(e){
-  ripple(e.currentTarget,e);
-  spk(e.currentTarget,'🌈'); spk(e.currentTarget,'💕');
-  setSweet(sweet+8); totalHits+=2; updateScores();
-  toast(toastPool.lob[Math.floor(Math.random()*3)]);
-  document.getElementById('sysMsg').textContent='甜蜜挑球成功，林宏翰心跳 +999 🌈';
-}
-function doNet(e){
-  ripple(e.currentTarget,e);
-  spk(e.currentTarget,'🫶'); spk(e.currentTarget,'🌸');
-  setSweet(sweet+6); totalHits++; updateScores();
-  toast(toastPool.net[Math.floor(Math.random()*3)]);
-  bfReact();
-}
-function doDouble(e){
-  ripple(e.currentTarget,e);
-  spk(e.currentTarget,'👫'); spk(e.currentTarget,'💗');
-  setSweet(sweet+15); totalHits+=5; updateScores();
-  const t=['混雙配對完成！球場上永遠的伴 👫','登記球場 CP！永遠一組 💗','林宏翰的永久混雙搭檔就是你！'];
-  toast(t[Math.floor(Math.random()*3)],2500);
-  document.getElementById('sysMsg').textContent='混雙配對已鎖定，永遠一組，不接受解散。';
-}
-function claimPartner(e){
-  ripple(document.getElementById('mainBtn'),e);
   if(!claimed){
     claimed=true;
+    btn.style.background='#50b870';
+    btn.innerHTML='<span>✅</span><span>成功領走！球場上只有你<span class="sub2">林宏翰 × 永久球伴 💍</span></span>';
+    document.getElementById('sysMsg').textContent='綁定成功！林宏翰的羽球搭檔與戀人已確認，不退不換，永久有效。';
     setSweet(100);
-    document.getElementById('mainBtn').style.background='#50b870';
-    document.getElementById('mainBtn').innerHTML='<span>✅</span><span>已領走！球場上的你是我的<span class="sub2">林宏翰 × 永久球伴</span></span><span>🏸</span>';
-    document.getElementById('sysMsg').textContent='綁定成功！林宏翰的球場伴侶已確認，不退不換，永久有效 💍';
-    toast('🎉 成功領走林宏翰！球場上的你是我的！',3000);
-    bfReact();
+    toast('🎉 恭喜！成功領走林宏翰！\n你是他唯一的球伴 💍',3000);
   } else {
     toast('已經綁定囉！放心 💗',1500);
   }
 }
-function pokeAv(e){
-  spk(e.currentTarget,'💗'); spk(e.currentTarget,'🏸');
-  bfReact();
-  setSweet(sweet+3); totalHits++; updateScores();
-}
+
+drawShuttle(22,42,15);
 </script>
