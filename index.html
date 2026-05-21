@@ -10,21 +10,17 @@
 .ttl .sub{font-size:11px;color:#e07090;letter-spacing:3px;margin-top:3px}
 .card{background:#fff;border-radius:20px;border:1.5px solid #f5ccd8;padding:13px;margin-bottom:10px}
 
-.court-wrap{position:relative;width:100%;height:190px;background:#c8eab0;border-radius:16px;border:2px solid #78b050;overflow:hidden;cursor:crosshair;user-select:none}
+.court-wrap{position:relative;width:100%;height:175px;background:#c8eab0;border-radius:16px;border:2px solid #78b050;overflow:hidden;cursor:crosshair;user-select:none}
 .net{position:absolute;top:0;left:50%;width:3px;height:100%;background:#5a9030;z-index:2}
 .net-top{position:absolute;top:0;left:46%;width:8%;height:6px;background:#3a7020;border-radius:0 0 4px 4px;z-index:3}
 .cline{position:absolute;background:rgba(255,255,255,0.5)}
-.rally-badge{position:absolute;top:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);border-radius:20px;padding:3px 14px;font-size:12px;font-weight:700;color:#3a8020;z-index:5;white-space:nowrap}
-.court-tip{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.88);border-radius:14px;padding:4px 14px;font-size:11px;font-weight:700;color:#c03060;white-space:nowrap;z-index:5;transition:opacity 0.3s}
-
-.shuttle{position:absolute;z-index:4;pointer-events:none;transition:none}
-.shuttle svg{display:block}
-
-.smash-word{position:absolute;pointer-events:none;z-index:10;font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:15px;color:#e03060;text-shadow:0 1px 4px rgba(255,255,255,0.8);animation:wordPop 1.1s ease-out forwards;white-space:nowrap}
-@keyframes wordPop{0%{opacity:1;transform:translateY(0) scale(0.6)}20%{transform:translateY(-8px) scale(1.15)}80%{opacity:1;transform:translateY(-32px) scale(1)}100%{opacity:0;transform:translateY(-52px) scale(0.9)}}
-
-.sparkle{position:absolute;pointer-events:none;z-index:9;animation:spkAnim 0.8s ease-out forwards}
-@keyframes spkAnim{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(0.3) translateY(-44px)}}
+.rally-badge{position:absolute;top:7px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.92);border-radius:20px;padding:3px 13px;font-size:12px;font-weight:700;color:#3a8020;z-index:5;white-space:nowrap}
+.court-tip{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.88);border-radius:14px;padding:3px 13px;font-size:11px;font-weight:700;color:#c03060;white-space:nowrap;z-index:5}
+.shuttle{position:absolute;z-index:4;pointer-events:none}
+.smash-word{position:absolute;pointer-events:none;z-index:10;font-family:'Noto Sans TC',sans-serif;font-weight:900;font-size:14px;text-shadow:0 1px 3px rgba(255,255,255,0.9);animation:wordPop 1.1s ease-out forwards;white-space:nowrap}
+@keyframes wordPop{0%{opacity:1;transform:translateY(0) scale(0.5)}20%{transform:translateY(-8px) scale(1.2)}80%{opacity:1;transform:translateY(-30px) scale(1)}100%{opacity:0;transform:translateY(-50px) scale(0.9)}}
+.spk{position:absolute;pointer-events:none;z-index:9;animation:spkA 0.8s ease-out forwards;font-size:15px}
+@keyframes spkA{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-42px) scale(0.3)}}
 
 .prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:#c07090;margin-bottom:4px}
 .prog-bg{background:#fde0ea;border-radius:20px;height:10px;overflow:hidden}
@@ -49,28 +45,44 @@
 .hb:nth-child(2){animation-delay:.18s}.hb:nth-child(3){animation-delay:.36s}.hb:nth-child(4){animation-delay:.54s}.hb:nth-child(5){animation-delay:.72s}
 @keyframes hbeat{0%,100%{transform:scale(1)}35%{transform:scale(1.35)}}
 
+.fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fun-btn{background:#fff;border:2px solid #f5ccd8;border-radius:18px;padding:13px 8px;text-align:center;cursor:pointer;transition:transform 0.15s,border-color 0.15s,background 0.15s;position:relative;overflow:hidden;user-select:none;-webkit-tap-highlight-color:transparent}
+.fun-btn:hover{border-color:#f090b0;background:#fff5f8}
+.fun-btn:active{transform:scale(0.91)}
+.fun-icon{font-size:28px;display:block;margin-bottom:5px;transition:transform 0.25s}
+.fun-btn:hover .fun-icon{transform:scale(1.25) rotate(-10deg)}
+.fun-title{font-size:11.5px;font-weight:900;color:#c03060;margin-bottom:2px}
+.fun-sub{font-size:10px;color:#d09090;line-height:1.4}
+
 .main-btn{width:100%;background:#f06080;border:none;border-radius:18px;color:#fff;font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:700;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;letter-spacing:1px;transition:transform 0.15s;position:relative;overflow:hidden}
 .main-btn:hover{transform:translateY(-2px)}
 .main-btn:active{transform:scale(0.97)}
 .main-btn .sub2{font-size:10px;font-weight:400;opacity:0.88;display:block;margin-top:2px;letter-spacing:2px}
 
-.sys-card{background:#f0f5e8;border:1.5px solid #c0d890;border-radius:16px;padding:11px 13px;display:flex;align-items:center;gap:10px}
+.sys-card{background:#f0f5e8;border:1.5px solid #c0d890;border-radius:16px;padding:11px 13px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .sys-txt{flex:1;font-size:11.5px;color:#607040;line-height:1.6}
 .sys-ttl{font-size:10px;color:#8aaa50;margin-bottom:2px;font-weight:700}
 .sys-ico{font-size:26px;animation:bob 2.5s ease-in-out infinite;flex-shrink:0}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.75);background:rgba(220,50,90,0.94);color:#fff;padding:14px 26px;border-radius:22px;font-size:14px;font-weight:700;font-family:'Noto Sans TC',sans-serif;opacity:0;pointer-events:none;transition:opacity 0.28s,transform 0.28s;z-index:999;letter-spacing:1px;text-align:center;max-width:260px;line-height:1.6}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.75);background:rgba(220,50,90,0.94);color:#fff;padding:14px 24px;border-radius:22px;font-size:14px;font-weight:700;font-family:'Noto Sans TC',sans-serif;opacity:0;pointer-events:none;transition:opacity 0.28s,transform 0.28s;z-index:999;letter-spacing:1px;text-align:center;max-width:265px;line-height:1.7}
 .toast.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.32);animation:rip 0.5s ease-out forwards;pointer-events:none}
 @keyframes rip{from{transform:scale(0);opacity:1}to{transform:scale(5);opacity:0}}
-.footer{text-align:center;font-size:10px;color:#d0a0b0;margin-top:10px}
+
+.shake{animation:shakeAnim 0.5s ease}
+@keyframes shakeAnim{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px) rotate(-3deg)}35%{transform:translateX(8px) rotate(3deg)}55%{transform:translateX(-6px)}75%{transform:translateX(6px)}90%{transform:translateX(-3px)}}
+.bounce{animation:bounceAnim 0.5s ease}
+@keyframes bounceAnim{0%,100%{transform:translateY(0)}30%{transform:translateY(-18px)}60%{transform:translateY(-8px)}80%{transform:translateY(-3px)}}
+.spin{animation:spinAnim 0.6s ease}
+@keyframes spinAnim{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+.footer{text-align:center;font-size:10px;color:#d0a0b0;margin-top:4px}
 </style>
 
-<h2 class="sr-only">林宏翰專屬羽球戀愛互動系統</h2>
+<h2 class="sr-only">林宏翰專屬羽球搞笑戀愛系統</h2>
 <div class="wrap" id="mainWrap">
 <div class="phone">
-
   <div class="sbar"><span>20:23 ♡</span><span>📶🔋</span></div>
   <div class="ttl">
     <h1>🏸 林宏翰 專屬戀愛系統 🏸</h1>
@@ -80,8 +92,7 @@
   <div class="card" style="padding:10px">
     <div style="font-size:11px;color:#c07090;font-weight:700;margin-bottom:7px;text-align:center">點擊球場！每一球都是告白 💗</div>
     <div class="court-wrap" id="court" onclick="hitCourt(event)">
-      <div class="net"></div>
-      <div class="net-top"></div>
+      <div class="net"></div><div class="net-top"></div>
       <div class="cline" style="top:0;left:8%;width:84%;height:1.5px"></div>
       <div class="cline" style="bottom:0;left:8%;width:84%;height:1.5px"></div>
       <div class="cline" style="top:0;left:8%;width:1.5px;height:100%"></div>
@@ -106,7 +117,7 @@
   </div>
 
   <div class="card bf-row">
-    <div style="flex-shrink:0;text-align:center;width:80px">
+    <div style="flex-shrink:0;text-align:center;width:82px">
       <div class="av-bub" id="bfBub">救命<br>被愛打到了</div>
       <span class="av" id="bfAv" onclick="pokeAv(event)">🧑‍🦱</span>
     </div>
@@ -120,6 +131,39 @@
     </div>
   </div>
 
+  <div class="fun-grid">
+    <div class="fun-btn" id="btnPout" onclick="doPout(event)">
+      <span class="fun-icon" id="iconPout">🐻</span>
+      <div class="fun-title">撒嬌攻擊</div>
+      <div class="fun-sub">對他發動<br>無敵撒嬌術</div>
+    </div>
+    <div class="fun-btn" id="btnCatch" onclick="doCatch(event)">
+      <span class="fun-icon" id="iconCatch">🏃</span>
+      <div class="fun-title">抓住他！</div>
+      <div class="fun-sub">他在逃跑<br>快去追！</div>
+    </div>
+    <div class="fun-btn" id="btnKiss" onclick="doKiss(event)">
+      <span class="fun-icon" id="iconKiss">💋</span>
+      <div class="fun-title">偷親一下</div>
+      <div class="fun-sub">趁他不注意<br>親下去！</div>
+    </div>
+    <div class="fun-btn" id="btnSecret" onclick="doSecret(event)">
+      <span class="fun-icon" id="iconSecret">📱</span>
+      <div class="fun-title">傳甜蜜簡訊</div>
+      <div class="fun-sub">傳一則<br>讓他臉紅的話</div>
+    </div>
+    <div class="fun-btn" id="btnJealous" onclick="doJealous(event)">
+      <span class="fun-icon" id="iconJealous">😤</span>
+      <div class="fun-title">吃醋模式</div>
+      <div class="fun-sub">他敢看別人<br>就給他看</div>
+    </div>
+    <div class="fun-btn" id="btnHug" onclick="doHug(event)">
+      <span class="fun-icon" id="iconHug">🤗</span>
+      <div class="fun-title">強制抱抱</div>
+      <div class="fun-sub">不給抱<br>就不放開！</div>
+    </div>
+  </div>
+
   <button class="main-btn" id="mainBtn" onclick="claimBtn(event)">
     <span>🔐</span>
     <span>領走羽球男友<span class="sub2">一鍵綁定 · 永久有效</span></span>
@@ -127,10 +171,7 @@
   </button>
 
   <div class="sys-card">
-    <div class="sys-txt">
-      <div class="sys-ttl">系統訊息</div>
-      <div id="sysMsg">林宏翰已被女友深深喜歡，無法解除。</div>
-    </div>
+    <div class="sys-txt"><div class="sys-ttl">系統訊息</div><div id="sysMsg">林宏翰已被女友深深喜歡，無法解除。</div></div>
     <div class="sys-ico">🤖</div>
   </div>
 
@@ -142,148 +183,163 @@
 <script>
 let rally=0,maxRally=0,total=0,sweet=0,claimed=false,lastHit=0;
 
-const loveWords=[
-  "我喜歡你 💗","你是我的寶貝","想跟你打一輩子","你超可愛的","我愛你啦笨蛋","只喜歡你一個","你是我的人 🔐",
-  "陪我打球好嗎","你讓我心跳加速","宏翰最棒了！","就決定是你了","喜歡你的笑","你是我最強搭檔","抱一下嘛～",
-  "跟你在一起好開心","永遠都喜歡你","你是我的小太陽","想牽你的手","一起練球好嗎？","你最好看了！",
-  "不許喜歡別人 😤","你好帥喔啦！","你是我的 OWO","愛你喔笨蛋","只有你才行"
-];
-
-const bfBubs=[
-  "救命\n被愛打到了","啊！好準！","我招架不住…","嘻嘻被發現了","臉好燙喔 🥺","喜歡你也是啦","哈哈哈哈哈","不要這樣嘛 😳"
-];
-const bfStats=[
-  "被甜蜜殺球追著跑","正在瘋狂臉紅中","笑到快掉球拍","被愛情鎖定中","戀愛模式全開","想把你藏起來","找不到防守方法"
-];
+const loveWords=["我喜歡你 💗","你是我的寶貝","想跟你打一輩子","你超可愛的","我愛你啦笨蛋","只喜歡你一個","你是我的人 🔐","你讓我心跳加速","宏翰最棒了！","就決定是你了","喜歡你的笑","你是我最強搭檔","抱一下嘛～","跟你在一起好開心","永遠都喜歡你","你是我的小太陽","想牽你的手","你最好看了！","不許喜歡別人 😤","你好帥喔啦！","你是我的 OWO","愛你喔笨蛋","只有你才行","討厭你！（才不是）","你讓我無法呼吸"];
+const bfBubs=["救命\n被愛打到了","啊！好準！","我招架不住…","嘻嘻被發現了","臉好燙喔 🥺","喜歡你也是啦","哈哈哈哈哈","不要這樣嘛 😳","嗚嗚好可愛","逃不掉了！","啊啊啊啊啊 😳"];
+const bfStats=["被甜蜜殺球追著跑","正在瘋狂臉紅中","笑到快掉球拍","被愛情鎖定中","戀愛模式全開","想把你藏起來","找不到防守方法","心跳破表中 💓"];
 const sweetLbls=["快去揮拍提升甜蜜度！","有點感覺了 🥰","甜蜜值上升中 💕","超甜！超甜！","甜到無法呼吸 💗","最高甜蜜等級 👑"];
 
-function toast(msg,dur=2200){
+const poutLines=["人家要抱抱啦 🐻","不理你了！（三秒後）\n好啦我還是喜歡你","哼！你要對我好一點！","嗚嗚為什麼你這麼可愛","我生氣了！\n（其實沒有）","宏翰～陪我～！","你不抱我我就一直撒嬌！","我要黏著你！"];
+const catchLines=["抓到你了！跑哪裡去！","你跑我就追！追到天涯海角！","快站住！我有話跟你說！\n（就是喜歡你）","哈！你以為你跑得掉？","我追你追了這麼久\n你給我站好！💨","捕獲稀有品種：超可愛的林宏翰 🎣","在愛情面前你永遠跑不掉 😤"];
+const kissLines=["親了！就是親了！\n哈哈哈哈 💋","趁你不注意！親下去！\n你臉好燙喔 🥺","偷親成功！\n+100 甜蜜值！","咦你臉這麼紅\n是因為我嗎？😏","親親！這是愛的攻擊！\n防不住的！","嘿嘿 親到了 💋\n快跑！（才不要跑）"];
+const secretLines=["傳送中…\n「我現在在想你」📱","「你知道嗎你真的很可愛」\n已讀！他臉紅了！","「晚安 想你 💗」\n送出！","「你吃飯了嗎 （想你）」\n他秒回了！！","「你是我今天\n心情最好的原因」 💌","「宏翰你很帥」\n傳送成功！他在笑了！"];
+const jealousLines=["哼！你剛才看哪裡！","我吃醋了怎樣！\n你只能看我！😤","那個人有我可愛嗎！\n回答我！","警告！⚠️\n林宏翰的眼睛\n只能看我！","好啦我知道你只喜歡我\n但我還是要吃醋！🍋","吃醋中…\n但其實超喜歡你 💗"];
+const hugLines=["抱住了！不放開！","強制抱抱！\n你要抱多久就多久！","嗚嗚好軟好想一直抱","抱著你不想動了啦 🐻","這個抱抱免費的\n但要還給我！（x）","抱住了！全世界都不要管我！💗","你太好抱了吧！\n以後每天都要抱！"];
+
+function toast(msg,dur=2400){
   const t=document.getElementById('toast');
-  t.innerHTML=msg; t.classList.add('show');
+  t.innerHTML=msg.replace(/\n/g,'<br>');
+  t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),dur);
 }
-
-function drawShuttle(x,y,angle){
-  const el=document.getElementById('shuttle');
-  el.style.left=x+'%'; el.style.top=y+'%';
-  const a=angle||Math.random()*360;
-  el.innerHTML=`<svg width="32" height="36" viewBox="0 0 32 36">
-    <ellipse cx="16" cy="10" rx="9" ry="7" fill="white" stroke="#ccc" stroke-width="1"/>
-    <line x1="16" y1="17" x2="16" y2="34" stroke="#e0c090" stroke-width="2.5" stroke-linecap="round"/>
-    <ellipse cx="16" cy="34" rx="4" ry="2.5" fill="#f0d070" stroke="#c8a840" stroke-width="1"/>
-    <line x1="9" y1="13" x2="16" y2="34" stroke="#e8d090" stroke-width="1" opacity="0.6"/>
-    <line x1="23" y1="13" x2="16" y2="34" stroke="#e8d090" stroke-width="1" opacity="0.6"/>
-    <line x1="7" y1="10" x2="16" y2="34" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/>
-    <line x1="25" y1="10" x2="16" y2="34" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/>
-  </svg>`;
-  el.style.transform=`rotate(${a}deg)`;
+function ripple(btn,e){
+  const r=btn.getBoundingClientRect(),d=document.createElement('div');
+  d.className='ripple';const sz=Math.max(r.width,r.height)*2;
+  d.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-r.left-sz/2}px;top:${e.clientY-r.top-sz/2}px`;
+  btn.appendChild(d);setTimeout(()=>d.remove(),600);
 }
-
-function spawnWord(x,y){
-  const court=document.getElementById('court');
-  const word=loveWords[Math.floor(Math.random()*loveWords.length)];
-  const el=document.createElement('div');
-  el.className='smash-word';
-  el.style.left=(Math.max(5,Math.min(x-8,65)))+'%';
-  el.style.top=(Math.max(5,y-5))+'%';
-  el.textContent=word;
-  const colors=['#e03060','#c020a0','#d04080','#a040c0','#e06090','#b02060'];
-  el.style.color=colors[Math.floor(Math.random()*colors.length)];
-  court.appendChild(el);
-  setTimeout(()=>el.remove(),1200);
+function animIcon(id,cls){
+  const el=document.getElementById(id);
+  el.classList.remove(cls);
+  void el.offsetWidth;
+  el.classList.add(cls);
+  setTimeout(()=>el.classList.remove(cls),600);
 }
-
-function spawnSparkle(x,y){
-  const court=document.getElementById('court');
-  const icons=['💗','🌸','✨','💕','⭐','🎀'];
-  for(let i=0;i<2;i++){
-    const s=document.createElement('div');
-    s.className='sparkle';
-    s.style.left=(x+(Math.random()-0.5)*18)+'%';
-    s.style.top=(y+(Math.random()-0.5)*14)+'%';
-    s.style.fontSize='16px';
-    s.textContent=icons[Math.floor(Math.random()*icons.length)];
-    court.appendChild(s);
-    setTimeout(()=>s.remove(),900);
-  }
+function bfReact(bubIdx){
+  const b=bfBubs[bubIdx!==undefined?bubIdx:Math.floor(Math.random()*bfBubs.length)];
+  document.getElementById('bfBub').innerHTML=b.replace('\n','<br>');
+  document.getElementById('bfStatusEl').textContent='狀態：'+bfStats[Math.floor(Math.random()*bfStats.length)];
+  const av=document.getElementById('bfAv');
+  av.classList.remove('shake','bounce','spin');
+  void av.offsetWidth;
+  const anims=['shake','bounce','spin'];
+  av.classList.add(anims[Math.floor(Math.random()*anims.length)]);
+  setTimeout(()=>av.classList.remove('shake','bounce','spin'),600);
 }
-
 function setSweet(v){
   sweet=Math.min(100,Math.max(0,v));
   const pct=Math.round(sweet)+'%';
   document.getElementById('sweetPct').textContent=pct;
   document.getElementById('sweetBar').style.width=pct;
-  const idx=Math.min(Math.floor(sweet/20),5);
-  document.getElementById('sweetLbl').textContent=sweetLbls[idx];
+  document.getElementById('sweetLbl').textContent=sweetLbls[Math.min(Math.floor(sweet/20),5)];
 }
-
+function drawShuttle(x,y){
+  const el=document.getElementById('shuttle');
+  el.style.left=x+'%';el.style.top=y+'%';
+  const a=Math.random()*360;
+  el.innerHTML=`<svg width="30" height="34" viewBox="0 0 30 34"><ellipse cx="15" cy="9" rx="8" ry="6.5" fill="white" stroke="#ccc" stroke-width="1"/><line x1="15" y1="15" x2="15" y2="31" stroke="#e0c090" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="15" cy="31" rx="3.5" ry="2.2" fill="#f0d070" stroke="#c8a840" stroke-width="1"/><line x1="9" y1="12" x2="15" y2="31" stroke="#e8d090" stroke-width="1" opacity="0.6"/><line x1="21" y1="12" x2="15" y2="31" stroke="#e8d090" stroke-width="1" opacity="0.6"/><line x1="7" y1="9" x2="15" y2="31" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/><line x1="23" y1="9" x2="15" y2="31" stroke="#e8d090" stroke-width="0.8" opacity="0.4"/></svg>`;
+  el.style.transform=`rotate(${a}deg)`;
+}
+function spawnWord(x,y){
+  const court=document.getElementById('court');
+  const w=loveWords[Math.floor(Math.random()*loveWords.length)];
+  const el=document.createElement('div');el.className='smash-word';
+  el.style.left=Math.max(4,Math.min(x-8,62))+'%';
+  el.style.top=Math.max(4,y-4)+'%';
+  el.textContent=w;
+  const cols=['#e03060','#b020a0','#d04080','#a040c0','#e06090','#c0206a'];
+  el.style.color=cols[Math.floor(Math.random()*cols.length)];
+  court.appendChild(el);setTimeout(()=>el.remove(),1200);
+}
+function spawnSpk(x,y){
+  const court=document.getElementById('court');
+  ['💗','🌸','✨','💕','⭐'].forEach((em,i)=>{
+    if(i>1) return;
+    const s=document.createElement('div');s.className='spk';
+    s.style.left=(x+(Math.random()-0.5)*16)+'%';
+    s.style.top=(y+(Math.random()-0.5)*12)+'%';
+    s.textContent=em;court.appendChild(s);
+    setTimeout(()=>s.remove(),900);
+  });
+}
 function hitCourt(e){
-  const now=Date.now();
-  if(now-lastHit<220) return;
-  lastHit=now;
-
+  const now=Date.now();if(now-lastHit<220)return;lastHit=now;
   const court=document.getElementById('court');
   const rect=court.getBoundingClientRect();
   const px=((e.clientX-rect.left)/rect.width)*100;
   const py=((e.clientY-rect.top)/rect.height)*100;
-
-  drawShuttle(px-2,py-3);
-  spawnWord(px,py);
-  spawnSparkle(px,py);
-
-  rally++; total++;
-  if(rally>maxRally) maxRally=rally;
+  drawShuttle(px-2,py-3);spawnWord(px,py);spawnSpk(px,py);
+  rally++;total++;if(rally>maxRally)maxRally=rally;
   setSweet(sweet+3.5);
   document.getElementById('maxRallyEl').textContent=maxRally;
   document.getElementById('totalEl').textContent=total;
   document.getElementById('rallyBadge').textContent='連擊 '+rally;
-
-  const tips=["又一球！💗","命中！🏸","殺球！✨","太準了！","甜蜜攻勢！","無法抵擋！","快接住！","愛情一擊！"];
+  const tips=["又一球！💗","命中！🏸","殺球！✨","太準了！","甜蜜攻勢！","無法抵擋！","愛情一擊！","完美落點！"];
   document.getElementById('courtTip').textContent=tips[Math.floor(Math.random()*tips.length)];
-
-  if(rally%5===0){
-    document.getElementById('bfBub').innerHTML=bfBubs[Math.floor(Math.random()*bfBubs.length)].replace('\n','<br>');
-    document.getElementById('bfStatusEl').textContent='狀態：'+bfStats[Math.floor(Math.random()*bfStats.length)];
-    const av=document.getElementById('bfAv');
-    av.style.transform='scale(1.18) rotate(8deg)';
-    setTimeout(()=>av.style.transform='',250);
-  }
-
-  if(rally===10) toast('🏸 10連擊！你的愛已打穿球網 💗',2000);
-  if(rally===20) toast('💥 20連擊！林宏翰完全招架不住！',2200);
-  if(rally===30) toast('👑 30連擊！傳說級甜蜜攻勢達成！',2500);
-  if(rally===50) toast('🌟 50連擊！你真的超愛他的吧！！💗',3000);
+  if(rally%5===0)bfReact();
+  if(rally===10)toast('🏸 10連擊！你的愛已打穿球網 💗');
+  if(rally===20)toast('💥 20連擊！林宏翰完全招架不住！');
+  if(rally===30)toast('👑 30連擊！傳說級甜蜜攻勢達成！',2800);
 }
-
 function pokeAv(e){
-  const av=document.getElementById('bfAv');
-  av.style.transform='scale(1.2) rotate(-12deg)';
-  setTimeout(()=>av.style.transform='',280);
-  document.getElementById('bfBub').innerHTML=bfBubs[Math.floor(Math.random()*bfBubs.length)].replace('\n','<br>');
-  total++; setSweet(sweet+2);
+  bfReact();setSweet(sweet+2);total++;
   document.getElementById('totalEl').textContent=total;
-  const word=loveWords[Math.floor(Math.random()*loveWords.length)];
-  toast(word,1600);
+  toast(loveWords[Math.floor(Math.random()*loveWords.length)],1600);
 }
-
+function doPout(e){
+  ripple(e.currentTarget,e);animIcon('iconPout','bounce');
+  setSweet(sweet+7);total+=2;document.getElementById('totalEl').textContent=total;
+  bfReact(Math.floor(Math.random()*3)+3);
+  toast(poutLines[Math.floor(Math.random()*poutLines.length)]);
+  document.getElementById('sysMsg').textContent='警告：女友撒嬌模式啟動，防禦力歸零。';
+}
+function doCatch(e){
+  ripple(e.currentTarget,e);animIcon('iconCatch','shake');
+  setSweet(sweet+6);total+=2;document.getElementById('totalEl').textContent=total;
+  bfReact(0);
+  toast(catchLines[Math.floor(Math.random()*catchLines.length)]);
+  document.getElementById('sysMsg').textContent='系統偵測：林宏翰逃跑失敗，已被成功捕獲。';
+}
+function doKiss(e){
+  ripple(e.currentTarget,e);animIcon('iconKiss','spin');
+  setSweet(sweet+10);total+=3;document.getElementById('totalEl').textContent=total;
+  bfReact(4);
+  toast(kissLines[Math.floor(Math.random()*kissLines.length)]);
+  document.getElementById('sysMsg').textContent='偷親成功！林宏翰臉紅指數 MAX。';
+}
+function doSecret(e){
+  ripple(e.currentTarget,e);animIcon('iconSecret','bounce');
+  setSweet(sweet+5);total++;document.getElementById('totalEl').textContent=total;
+  bfReact(6);
+  toast(secretLines[Math.floor(Math.random()*secretLines.length)]);
+  document.getElementById('sysMsg').textContent='甜蜜簡訊已送出，林宏翰正在偷笑中。';
+}
+function doJealous(e){
+  ripple(e.currentTarget,e);animIcon('iconJealous','shake');
+  setSweet(sweet+4);total++;document.getElementById('totalEl').textContent=total;
+  bfReact(7);
+  toast(jealousLines[Math.floor(Math.random()*jealousLines.length)]);
+  document.getElementById('sysMsg').textContent='吃醋模式啟動！林宏翰正在發誓只看你。';
+}
+function doHug(e){
+  ripple(e.currentTarget,e);animIcon('iconHug','bounce');
+  setSweet(sweet+8);total+=2;document.getElementById('totalEl').textContent=total;
+  bfReact(5);
+  toast(hugLines[Math.floor(Math.random()*hugLines.length)]);
+  document.getElementById('sysMsg').textContent='強制抱抱成功！林宏翰已被抱住，無法移動。';
+}
 function claimBtn(e){
-  const btn=document.getElementById('mainBtn');
-  const r=btn.getBoundingClientRect();
-  const d=document.createElement('div'); d.className='ripple';
-  const sz=Math.max(r.width,r.height)*2;
-  d.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-r.left-sz/2}px;top:${e.clientY-r.top-sz/2}px`;
-  btn.appendChild(d); setTimeout(()=>d.remove(),600);
+  ripple(document.getElementById('mainBtn'),e);
   if(!claimed){
     claimed=true;
-    btn.style.background='#50b870';
-    btn.innerHTML='<span>✅</span><span>成功領走！球場上只有你<span class="sub2">林宏翰 × 永久球伴 💍</span></span>';
+    document.getElementById('mainBtn').style.background='#50b870';
+    document.getElementById('mainBtn').innerHTML='<span>✅</span><span>成功領走！球場上只有你<span class="sub2">林宏翰 × 永久球伴 💍</span></span>';
     document.getElementById('sysMsg').textContent='綁定成功！林宏翰的羽球搭檔與戀人已確認，不退不換，永久有效。';
     setSweet(100);
     toast('🎉 恭喜！成功領走林宏翰！\n你是他唯一的球伴 💍',3000);
+    bfReact(9);
   } else {
     toast('已經綁定囉！放心 💗',1500);
   }
 }
-
-drawShuttle(22,42,15);
+drawShuttle(22,42);
 </script>
