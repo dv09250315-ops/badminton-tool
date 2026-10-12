@@ -46,3 +46,33 @@ prizes.forEach(z=>{
   const a0=(z.start-90)*Math.PI/180,a1=(z.end-90)*Math.PI/180;
   ctx.beginPath();ctx.moveTo(C,C);ctx.arc(C,C,R,a0,a1);ctx.closePath();
   ctx.fillStyle=z.color;ctx.fill();
+  ctx.lineWidth=6;ctx.strokeStyle="#fff";ctx.stroke();
+  ctx.save();ctx.translate(C,C);ctx.rotate((a0+a1)/2);
+  ctx.textAlign="right";ctx.fillStyle="#fff";ctx.font="bold 54px sans-serif";
+  ctx.fillText(z.name,R-40,18);
+  ctx.restore();
+});
+let rot=0,spinning=false;
+const btn=document.getElementById("spin"),res=document.getElementById("result");
+function pick(){
+  let r=Math.random()*100,s=0;
+  for(const z of prizes){s+=z.p;if(r<s)return z;}
+  return prizes[0];
+}
+btn.onclick=()=>{
+  if(spinning)return;
+  spinning=true;btn.disabled=true;res.textContent="";
+  const z=pick();
+  const target=z.start+(z.end-z.start)*(0.15+Math.random()*0.7);
+  const cur=((rot%360)+360)%360;
+  const delta=((360-target)-cur+360)%360;
+  rot+=360*6+delta;
+  canvas.style.transform=`rotate(${rot}deg)`;
+  setTimeout(()=>{
+    res.textContent=`🎉 恭喜抽中：${z.name}！`;
+    spinning=false;btn.disabled=false;btn.textContent="再抽一次";
+  },5200);
+};
+</script>
+</body>
+</html>
