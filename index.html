@@ -39,7 +39,6 @@ const prizes=[
 const canvas=document.getElementById("wheel"),ctx=canvas.getContext("2d");
 const S=canvas.width,C=S/2,R=C-6;
 let acc=0;
-// 機率（已編碼）：35 / 25 / 25 / 15，順序對應上面四個獎項
 const W=JSON.parse(atob("WzM1LDI1LDI1LDE1XQ=="));
 prizes.forEach((z,i)=>{z.p=W[i];z.start=i*90;z.end=(i+1)*90;});
 prizes.forEach(z=>{
@@ -50,6 +49,7 @@ prizes.forEach(z=>{
   ctx.save();ctx.translate(C,C);ctx.rotate((a0+a1)/2);
   ctx.textAlign="right";ctx.fillStyle="#fff";ctx.font="bold 54px sans-serif";
   ctx.fillText(z.name,R-40,18);
+  ctx.font="bold 30px sans-serif";ctx.globalAlpha=.85;
   ctx.restore();
 });
 let rot=0,spinning=false;
@@ -63,7 +63,7 @@ btn.onclick=()=>{
   if(spinning)return;
   spinning=true;btn.disabled=true;res.textContent="";
   const z=pick();
-  const target=z.start+(z.end-z.start)*(0.15+Math.random()*0.7);
+  const target=z.start+(z.end-z.start)*(0.15+Math.random()*0.7); // avoid edges
   const cur=((rot%360)+360)%360;
   const delta=((360-target)-cur+360)%360;
   rot+=360*6+delta;
